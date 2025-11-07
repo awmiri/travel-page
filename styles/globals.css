@@ -1,5 +1,25 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+@font-face {
+  font-family: IranYekanbold;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/iranFont/IRANYekanX-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: iranYekanMedium;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/iranFont/IRANYekanX-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: iranYekanRegular;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/iranFont/IRANYekanX-Regular.woff2") format("woff2");
+}
 @theme {
   /* custom tailwind color  */
   --color-mainBgColor: #fffbfb;
@@ -8,6 +28,26 @@
   --color-textDark: #ffffff;
   --color-cusOrang: #ff782c;
   --color-cusWhite: #e4e4e4bf;
+  --color-cusWhite2: #fffbfb;
   --color-cusBlue: #5264ff;
   /* custom tailwind font  */
+  --font-iranYekanBold: "iranYekanBold";
+  --font-iranYekanMedium: "iranYekanMedium";
+  --font-iranYekanRegular: "iranYekanRegular";
+}
+.nav_animation {
+  position: relative;
+}
+.nav_animation::before {
+  content: " ";
+  position: absolute;
+  height: 1.5px;
+  width: 0;
+  background-color: #5264ff;
+  bottom: 0;
+  right: 0px;
+  transition: width 0.3s ease 0.1s;
+}
+.nav_animation:hover::before {
+  width: 100%;
 }
