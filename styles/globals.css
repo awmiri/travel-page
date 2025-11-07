@@ -34,6 +34,10 @@
   --font-iranYekanBold: "iranYekanBold";
   --font-iranYekanMedium: "iranYekanMedium";
   --font-iranYekanRegular: "iranYekanRegular";
+  /* query */
+  --breakpoint-query1120: 70rem;
+  --breakpoint-query1000: 62.5rem;
+  --breakpoint-query860: 53.75rem;
 }
 .nav_animation {
   position: relative;
