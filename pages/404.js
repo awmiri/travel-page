@@ -2,10 +2,14 @@ import React from 'react'
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import Link from 'next/link';
 import Header from '@/template/module/Header';
+import Head from 'next/head';
 
 function NotFoundPage() {
     return (
         <div>
+            <Head>
+                <title>404</title>
+            </Head>
             <Header />
             <div className='flex flex-col items-center justify-center h-dvh -mt-22'>
                 <div className="w-[400px] sm:w-[500px] md:w-[600px] lg:w-[800px]">

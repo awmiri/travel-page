@@ -82,7 +82,7 @@ function Header() {
                     </div>
                 </div>
             </div>
-            <div className={`bg-black/15 absolute z-10 w-full h-dvh top-0 sm:hidden transition-all duration-200 ${openMobileNav ? 'opacity-100 visible' : 'opacity-0 invisible'}`}></div>
+            <div className={`bg-black/15 absolute z-10 w-full h-dvh top-0 sm:hidden transition-all duration-200 ${openMobileNav ? 'opacity-100 visible' : 'opacity-0 invisible'}`} onClick={() => setOpenMobileNav(false)}></div>
         </>
     )
 }
