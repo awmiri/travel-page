@@ -11,6 +11,7 @@
     "@lottiefiles/dotlottie-react": "^0.17.7",
     "axios": "^1.13.2",
     "bcrypt": "^6.0.0",
+    "cookie": "^1.0.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.19.3",
     "next": "16.0.1",
