@@ -27,8 +27,10 @@ const signup = async (req, res) => {
 
         const hashPass = await hashPassword(password)
 
-        const createUser = await UserModel.create({ phone, email, password: hashPass })
-        const token = generateToken(email)
+        const allUser = await UserModel.find({})
+
+        const createUser = await UserModel.create({ phone, email, password: hashPass, role: allUser.length > 0 ? "user" : "admin" })
+        const token = generateToken({ email })
 
         return res.setHeader("set-cookie", serialize("token", token, {
             httpOnly: true,

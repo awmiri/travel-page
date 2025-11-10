@@ -20,8 +20,10 @@ const schema = mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minlength: 8,
-        match: /^[A-Z][A-Za-z0-9!@#$%^&*._-]{7,}$/
+    },
+    role: {
+        type: String,
+        required: true,
     }
 })
 
