@@ -101,11 +101,11 @@ function SignUp() {
             </Head>
             {/* main content */}
             <div className="flex items-center justify-center h-dvh overflow-hidden">
-                <ToastContainer autoClose={3000} position='top-right' />
+                <ToastContainer autoClose={2500} position='top-right' />
                 <div className="flex items-center justify-between w-[1100px] rounded-2xl  overflow-hidden">
                     {/* sign up container */}
                     <div>
-                        <h2 className="text-3xl font-iranYekanBold mb-3">خوش آمدید</h2>
+                        <h2 className="text-3xl font-vazirBold mb-3">خوش آمدید</h2>
                         {/* sign up form */}
                         <form className="flex flex-col  p-10 w-[400px]">
                             {/* sign up title */}

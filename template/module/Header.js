@@ -82,7 +82,7 @@ function Header() {
                             </svg>
                         </div>
                         {/* login btn */}
-                        <Link href={"/signUp"} className='cursor-pointer border border-textLight/25 dark:border-white flex items-center gap-1 py-1.5 md:py-2 px-2 query860:px-3 query1000:px-4 rounded-4xl overflow-clip relative group transition-all'>
+                        <Link href={"/signup"} className='cursor-pointer border border-textLight/25 dark:border-white flex items-center gap-1 py-1.5 md:py-2 px-2 query860:px-3 query1000:px-4 rounded-4xl overflow-clip relative group transition-all'>
                             <svg fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4 md:size-5 query1120:size-6 text-textLight dark:text-white sm:group-hover:text-white duration-200">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                             </svg>

@@ -20,6 +20,12 @@
   font-display: swap;
   src: url("/iranFont/IRANYekanX-Regular.woff2") format("woff2");
 }
+@font-face {
+  font-family: vazirBold;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/iranFont/Vazirmatn-Bold.woff2") format("woff2");
+}
 @theme {
   /* custom tailwind color  */
   --color-mainBgColor: #fffbfb;
@@ -35,6 +41,7 @@
   --font-iranYekanBold: "iranYekanBold";
   --font-iranYekanMedium: "iranYekanMedium";
   --font-iranYekanRegular: "iranYekanRegular";
+  --font-vazirBold: "vazirBold";
   /* query */
   --breakpoint-query1120: 70rem;
   --breakpoint-query1000: 62.5rem;
