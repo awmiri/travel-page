@@ -80,6 +80,11 @@ input[type="number"]::-webkit-outer-spin-button {
   position: absolute;
   z-index: -10;
 }
+@media only screen and (max-width: 1024px) {
+  .cus-line_signup::after {
+    width: 270px;
+  }
+}
 /* custom btn animation 👇 */
 
 /* 404 btn with animation  */
