@@ -1,7 +1,9 @@
+import { validationToken } from '@/utility/auth'
 import axios from 'axios'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
@@ -137,4 +139,25 @@ function Login() {
     )
 }
 
+export async function getServerSideProps(context) {
+    const { ["token"]: token } = context.req.cookies
+
+    const isValidationToken = validationToken(token)
+    if (!token || !isValidationToken) {
+        return {
+            redirect: {
+                destination: "/signup",
+                permanent: false
+            }
+        }
+    }
+
+
+    return {
+        redirect: {
+            destination: "/",
+            permanent: false
+        }
+    }
+}
 export default Login

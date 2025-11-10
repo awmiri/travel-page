@@ -1,5 +1,5 @@
 import { compare, hash } from "bcrypt";
-import { sign } from "jsonwebtoken";
+import { sign, verify } from "jsonwebtoken";
 
 const hashPassword = async (password) => {
     const hashedPassword = await hash(password, 12)
@@ -18,5 +18,13 @@ const generateToken = (data) => {
     })
     return token
 }
-
-export { hashPassword, generateToken, verifyPassword } 
+const validationToken = (token) => {
+    try {
+        const isValidation = verify(token, process.env.privetTokenKey)
+        return isValidation
+    } catch (err) {
+        console.log(err);
+        return false
+    }
+}
+export { hashPassword, generateToken, verifyPassword, validationToken } 
