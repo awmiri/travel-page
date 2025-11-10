@@ -74,7 +74,7 @@ function Login() {
             {/* main content */}
             <div className="flex sm:items-center justify-center h-dvh overflow-hidden">
                 <ToastContainer style={{ width: "330px", textWrap: "nowrap", marginRight: "14px", marginTop: "20px" }} autoClose={2700} position='top-right' />
-                <div className="flex items-center justify-between max-sm:flex-col-reverse w-[1100px] max-sm:h-[680px] rounded-2xl p-6 sm:p-4 overflow-hidden">
+                <div className="flex items-center max-sm:gap-5 justify-end sm:justify-between max-sm:flex-col-reverse w-[1100px] max-sm:h-[680px] p-6 sm:p-4 overflow-hidden">
                     {/* sign up container */}
                     <div>
                         <h2 className="text-2xl hidden md:block query860:text-3xl font-vazirBold mb-3">خوش آمدید</h2>
@@ -124,7 +124,7 @@ function Login() {
                         <span className='text-center text-[13px] lg:text-sm font-iranYekanBold flex items-center justify-center gap-1 text-textLight dark:text-white mt-2.5'>حساب کاربری ندارید؟<Link href={"/signup"} className='text-cusBlue'>ثبت نام</Link></span>
                     </div>
                     {/* img container */}
-                    <div className="relative w-full sm:w-[300px] md:w-[400px] query860:w-[470px] lg:w-[600px] h-[300px] sm:h-[470px] md:h-[520px] query860:h-[570px] lg:h-[650px] flex-shrink-0">
+                    <div className="relative w-full sm:w-[300px] md:w-[400px] query860:w-[470px] lg:w-[600px] h-[220px] sm:h-[470px] md:h-[520px] query860:h-[570px] lg:h-[650px] flex-shrink-0">
                         <Image
                             src="/sign-login/Login-img.webp"
                             alt="login image"
@@ -141,23 +141,26 @@ function Login() {
 
 export async function getServerSideProps(context) {
     const { ["token"]: token } = context.req.cookies
+    if (!token) {
+        return {
+            props: {}
+        };
+    }
 
-    const isValidationToken = validationToken(token)
-    if (!token || !isValidationToken) {
+    const isValidationToken = await validationToken(token);
+
+    if (isValidationToken) {
         return {
             redirect: {
-                destination: "/signup",
+                destination: "/",
                 permanent: false
             }
-        }
+        };
     }
-
 
     return {
-        redirect: {
-            destination: "/",
-            permanent: false
-        }
-    }
+        props: {}
+    };
+
 }
 export default Login
