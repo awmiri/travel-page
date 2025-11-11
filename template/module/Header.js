@@ -3,6 +3,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import Image from 'next/image';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 function Header() {
     const [openMobileNav, setOpenMobileNav] = useState(false);
@@ -96,6 +97,17 @@ function Header() {
             <div className={`bg-black/15 absolute z-10 w-full h-dvh top-0 sm:hidden transition-all duration-200 ${openMobileNav ? 'opacity-100 visible' : 'opacity-0 invisible'}`} onClick={() => setOpenMobileNav(false)}></div>
         </>
     )
+}
+
+export async function getServerSideProps(context) {
+    const { ["token"]: token } = context.req.cookies
+    if (!token) {
+        return {
+            redirect: {
+                destination:
+            }
+        }
+    }
 }
 
 export default Header
