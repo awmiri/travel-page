@@ -1,7 +1,7 @@
 import React from 'react'
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import Link from 'next/link';
-import Header from '@/template/module/Header';
+import Header from '@/components/module/Header';
 import Head from 'next/head';
 
 function NotFoundPage() {

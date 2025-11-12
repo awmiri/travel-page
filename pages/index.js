@@ -1,4 +1,6 @@
-import Header from "@/template/module/Header";
+// import Gallery from "@/template/components/index/Gallery";
+import PageTitle from "@/components/template/index/PageTitle";
+import Header from "@/components/module/Header";
 import Head from "next/head";
 
 
@@ -15,6 +17,14 @@ export default function Home() {
       <header>
         <Header />
       </header>
+      <main>
+        <section className="mt-5">
+          <div className="flex items-center mx-[20px] md:mx-[24px] query1000:mx-[60px] query1120:mx-[71.5px]">
+            <PageTitle />
+            {/* <Gallery /> */}
+          </div>
+        </section>
+      </main>
     </>
   );
 }

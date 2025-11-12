@@ -85,6 +85,10 @@ input[type="number"]::-webkit-outer-spin-button {
     width: 270px;
   }
 }
+
+.text-cusBlue2 {
+  color: #5264ff;
+}
 /* custom btn animation 👇 */
 
 /* 404 btn with animation  */
