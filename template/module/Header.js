@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import { useRouter } from 'next/router';
 
 function Header() {
     const [openMobileNav, setOpenMobileNav] = useState(false);
@@ -14,6 +16,7 @@ function Header() {
     const [userAdmin, setUserAdmin] = useState(false)
     const [userLogin, setUserLogin] = useState(false)
     const [userContent, setUserContent] = useState({})
+    const router = useRouter()
     console.log(userContent);
 
 
@@ -43,6 +46,26 @@ function Header() {
         }
         isUserLogin()
     }, [])
+
+    const logOutHandler = async (e) => {
+        e.preventDefault()
+        try {
+            const res = await axios.get("/api/auth/logout")
+            if (res.status === 200) {
+                setUserAdmin(false)
+                setUserLogin(false)
+                toast.success("خروج موفق ,به امید دیدن مجدد")
+                setTimeout(() => {
+                    router.replace("/")
+                }, 3000);
+            }
+        } catch (err) {
+            console.log(err);
+
+        }
+    }
+    useEffect(() => {
+    }, [])
     useEffect(() => setMounted(true), []);
     if (!mounted) return null;
 
@@ -51,6 +74,7 @@ function Header() {
         <>
             <div className='border-b border-textLight/40 dark:text-white/25 transition'>
                 {/* nav countainer  */}
+                <ToastContainer style={{ width: "330px", textWrap: "nowrap", marginRight: "14px", marginTop: "20px" }} autoClose={2700} position='top-right' />
                 <div className='mx-[20px] md:mx-[24px] query1000:mx-[60px] query1120:mx-[71.5px] py-[15px] flex items-center justify-between'>
                     {/* desktop unorder list */}
                     <ul className='flex items-center gap-1 md:gap-1.5 max-sm:hidden'>
@@ -122,13 +146,13 @@ function Header() {
                                                 <h5 className='mb-3 font-vazirBold text-[17px]'>خوش امدید</h5>
                                                 <div className='border-t border-b'>
                                                     <ul className='mt-4 mb-4'>
-                                                        <li className='flex items-center gap-2 font-iranYekanMedium px-2 py-2.5 hover:bg-white/10 delay-75 transition rounded-[10px]'>
+                                                        <li className='flex items-center gap-2 cursor-pointer font-iranYekanMedium px-2 py-2.5 hover:bg-white/10 delay-75 transition rounded-[10px]'>
                                                             <svg fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
                                                             </svg>
                                                             حساب کاربری
                                                         </li>
-                                                        <li className='flex items-center gap-2 font-iranYekanMedium px-2 py-2.5 hover:bg-white/10 delay-75 transition rounded-[10px]'>
+                                                        <li className='flex items-center gap-2 cursor-pointer font-iranYekanMedium px-2 py-2.5 hover:bg-white/10 delay-75 transition rounded-[10px]'>
                                                             <svg fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
                                                             </svg>
@@ -146,7 +170,7 @@ function Header() {
                                                         }
                                                     </ul>
                                                 </div>
-                                                <div className='mt-3 flex items-center gap-2 font-iranYekanMedium px-2 py-2.5 hover:bg-red-500 delay-75 transition rounded-[10px]'>
+                                                <div className='mt-3 flex items-center gap-2 font-iranYekanMedium px-2 py-2.5 hover:bg-red-500 delay-75 transition rounded-[10px] cursor-pointer' onClick={logOutHandler}>
                                                     <svg fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                                         <path strokeLinecap="round" strokeLinejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
                                                     </svg>
