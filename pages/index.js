@@ -19,11 +19,11 @@ export default function Home() {
       </header>
       <main>
         <section className="mt-5">
-          <div className="flex items-center justify-between mx-[20px] md:mx-[24px] query1000:mx-[60px] query1120:mx-[71.5px]">
-            <div className="w-1/2">
+          <div className="flex justify-between mx-[20px] md:mx-[24px] query1000:mx-[60px] query1120:mx-[71.5px]">
+            <div className=" mt-7 max-query600:w-full">
               <PageTitle />
             </div>
-            <div className="w-1/2">
+            <div className="w-[370px] sm:w-[400px] md:w-[430px] query860:w-[490px] query1120:w-[540px] min-w-[370px] sm:min-w-[400px] md:min-w-[430px] query860:min-w-[490px] query1120:min-w-[540px] hidden query600:block">
               <Gallery />
             </div>
           </div>

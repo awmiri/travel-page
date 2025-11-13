@@ -45,7 +45,10 @@
   /* query */
   --breakpoint-query1120: 70rem;
   --breakpoint-query1000: 62.5rem;
+  --breakpoint-query900: 56.25rem;
   --breakpoint-query860: 53.75rem;
+  --breakpoint-query600: 37.5rem;
+  --breakpoint-query400: 25rem;
 }
 .nav_animation {
   position: relative;
