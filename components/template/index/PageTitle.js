@@ -3,7 +3,7 @@ import React from 'react'
 import Typewriter from 'typewriter-effect'
 function PageTitle() {
     return (
-        <div >
+        <div className=''>
             <div className=' border flex items-center gap-1.5 rounded-4xl py-2.5 px-3 bg-cusOrang/20 border-cusOrang/30 text-cusOrang w-[240px]'>
                 <Image src={"/header-img/sunrise.webp"} width={20} height={20} alt='sunrise' />
                 <p className='text-sm font-vazirBold'>بسیار سفر باید تا پخته شود خامی</p>
