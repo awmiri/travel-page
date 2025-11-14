@@ -22,7 +22,7 @@ function Gallery() {
                 width={600}
                 height={700}
                 alt={cityArry[number].englishName}
-                className="w-full query600:w-[600px] h-[300px] query600:h-[510px] md:h-[550px] query860:h-[600px] fixed-img object-center rounded-4xl"
+                className="w-full query600:w-[600px] h-[300px] query600:h-[470px] md:h-[500px] query860:h-[640px] fixed-img object-center rounded-4xl"
             />
             <div className='absolute z-10 left-4 query600:left-6 query860:left-10 top-4 query600:top-6 flex items-center flex-col'>
                 <div className='w-[110px] query600:w-[150px] query860:w-[200px] h-[110px] query600:h-[140px] query860:h-[170px] flex items-start flex-col justify-center bg-[#FFFFFF9C]/70 border border-[#FFFFFF] rounded-4xl px-1 query600:px-3 query860:px-5 py-1 query600:py-3 query860:py-5'>

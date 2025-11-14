@@ -43,12 +43,22 @@
   --font-iranYekanRegular: "iranYekanRegular";
   --font-vazirBold: "vazirBold";
   /* query */
+  --breakpoint-query1280: 80rem;
   --breakpoint-query1120: 70rem;
   --breakpoint-query1000: 62.5rem;
   --breakpoint-query900: 56.25rem;
   --breakpoint-query860: 53.75rem;
   --breakpoint-query600: 37.5rem;
   --breakpoint-query400: 25rem;
+}
+
+body {
+  background: #fffbfb;
+}
+
+/* Dark mode */
+.dark body {
+  background: #1e1e1e;
 }
 .nav_animation {
   position: relative;

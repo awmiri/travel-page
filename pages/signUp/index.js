@@ -192,7 +192,7 @@ function SignUp() {
                         <span className='text-center text-[13px] lg:text-sm font-iranYekanBold flex items-center justify-center gap-1 text-textLight dark:text-white mt-1.5 sm:-mt-2.5'>رمز عبور خود را فراموش کرده اید؟<Link href={"/"} className='text-cusBlue'>بازیابی رمز عبور</Link></span>
                         {/* login btn */}
                         <div className='relative cus-line_signup flex items-center justify-center mt-4'>
-                            <span className=' bg-white dark:bg-[#121212] px-5 text-[#A6A6A6] font-iranYekanRegular text-sm'>ثبت نام</span>
+                            <span className=' bg-mainBgColor dark:bg-mainBgColorDark px-5 text-[#A6A6A6] font-iranYekanRegular text-sm'>ثبت نام</span>
                         </div>
                         <span className='text-center text-[13px] lg:text-sm font-iranYekanBold flex items-center justify-center gap-1 text-textLight dark:text-white mt-2.5'>عضو سفرکن هستید؟<Link href={"/login"} className='text-cusBlue'>ورود</Link></span>
                     </div>

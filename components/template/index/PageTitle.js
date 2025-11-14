@@ -28,25 +28,25 @@ function PageTitle() {
             <div className='flex items-center max-query600:justify-center max-query600:mt-7 flex-wrap gap-6'>
                 <div className='flex flex-col items-center gap-1'>
                     <div className='w-[65px] query600:w-[50px] query860:w-[60px] query900:w-[70px] h-[65px] query600:h-[50px] query860:h-[60px] query900:h-[70px] flex items-center justify-center border rounded-2xl query860:rounded-3xl border-[#40404040]/40 dark:border-[#FFFFFF40]/30 bg-white dark:bg-[#1E1E1E]'>
-                        <Image src={"/header-img/tent.webp"} width={35} height={35} alt='tent' className='query600:w-[25px] query860:w-[35] query600:h-[25px] query860:h-[35px]' />
+                        <Image src={"/header-img/tent.webp"} width={35} height={35} alt='tent' className='query600:w-[25px] query860:w-[35px] query600:h-[25px] query860:h-[35px]' />
                     </div>
                     <h4 className='text-sm font-iranYekanBold'>کمپ</h4>
                 </div>
                 <div className='flex flex-col items-center gap-1'>
                     <div className='w-[65px] query600:w-[50px] query860:w-[60px] query900:w-[70px] h-[65px] query600:h-[50px] query860:h-[60px] query900:h-[70px] flex items-center justify-center border rounded-2xl query860:rounded-3xl border-[#40404040]/40 dark:border-[#FFFFFF40]/30 bg-white dark:bg-[#1E1E1E]'>
-                        <Image src={"/header-img/beach.webp"} width={35} height={35} alt='beach' className='query600:w-[25px] query860:w-[35] query600:h-[25px] query860:h-[35px]' />
+                        <Image src={"/header-img/beach.webp"} width={35} height={35} alt='beach' className='query600:w-[25px] query860:w-[35px] query600:h-[25px] query860:h-[35px]' />
                     </div>
                     <h4 className='text-sm font-iranYekanBold'>ساحل</h4>
                 </div>
                 <div className='flex flex-col items-center gap-1'>
                     <div className='w-[65px] query600:w-[50px] query860:w-[60px] query900:w-[70px] h-[65px] query600:h-[50px] query860:h-[60px] query900:h-[70px] flex items-center justify-center border rounded-2xl query860:rounded-3xl border-[#40404040]/40 dark:border-[#FFFFFF40]/30 bg-white dark:bg-[#1E1E1E]'>
-                        <Image src={"/header-img/city.webp"} width={35} height={35} alt='city' className='query600:w-[25px] query860:w-[35] query600:h-[25px] query860:h-[35px]' />
+                        <Image src={"/header-img/city.webp"} width={35} height={35} alt='city' className='query600:w-[25px] query860:w-[35px] query600:h-[25px] query860:h-[35px]' />
                     </div>
                     <h4 className='text-sm font-iranYekanBold'>شهر</h4>
                 </div>
                 <div className='flex flex-col items-center gap-1'>
                     <div className='w-[65px] query600:w-[50px] query860:w-[60px] query900:w-[70px] h-[65px] query600:h-[50px] query860:h-[60px] query900:h-[70px] flex items-center justify-center border rounded-2xl query860:rounded-3xl border-[#40404040]/40 dark:border-[#FFFFFF40]/30 bg-white dark:bg-[#1E1E1E]'>
-                        <Image src={"/header-img/mountain.webp"} width={35} height={35} alt='mountain' className='query600:w-[25px] query860:w-[35] query600:h-[25px] query860:h-[35px]' />
+                        <Image src={"/header-img/mountain.webp"} width={35} height={35} alt='mountain' className='query600:w-[25px] query860:w-[35px] query600:h-[25px] query860:h-[35px]' />
                     </div>
                     <h4 className='text-sm font-iranYekanBold'>جنگل</h4>
                 </div>
