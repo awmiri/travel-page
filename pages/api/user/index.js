@@ -11,7 +11,7 @@ const User = async (req, res) => {
         await ConnectDb()
         const getUser = await UserModel.find({}, "-password")
 
-        if (!getUser) {
+        if (getUser.length === 0) {
             return res.status(404).json({ message: "user not found" })
         }
 
