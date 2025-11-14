@@ -6,13 +6,17 @@ import UserModel from '@/model/user'
 import { validationToken } from '@/utility/auth'
 import React from 'react'
 
-const index = ({ data }) => {
+const index = ({ data, children }) => {
     return (
         <div>
             <AdminPanelHeader information={data} />
-            <div>
-                <PanelNav />
-                <PanelContent />
+            <div className='flex px-5 h-full'>
+                <aside>
+                    <PanelNav />
+                </aside>
+                <main>
+                    {children}
+                </main>
             </div>
         </div>
     )
