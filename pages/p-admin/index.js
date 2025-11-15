@@ -1,24 +1,15 @@
-import AdminPanelHeader from '@/components/template/adminPanel/AdminPanelHeader'
-import PanelContent from '@/components/template/adminPanel/PanelContent'
-import PanelNav from '@/components/template/adminPanel/PanelNav'
+import AdminLayout from '@/components/template/adminPanel/AdminLayout'
 import ConnectDb from '@/config/ConnectDb'
 import UserModel from '@/model/user'
 import { validationToken } from '@/utility/auth'
 import React from 'react'
 
-const index = ({ data, children }) => {
+const index = ({ data }) => {
     return (
-        <div>
-            <AdminPanelHeader information={data} />
-            <div className='flex px-5 h-full'>
-                <aside>
-                    <PanelNav />
-                </aside>
-                <main>
-                    {children}
-                </main>
-            </div>
-        </div>
+        <>
+            <AdminLayout information={data} />
+        </>
+
     )
 }
 export async function getServerSideProps(context) {
