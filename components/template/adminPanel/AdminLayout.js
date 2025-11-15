@@ -6,11 +6,11 @@ function AdminLayout({ information, children }) {
     return (
         <div>
             <AdminPanelHeader information={information} />
-            <div className='flex gap-5 px-5 h-full'>
-                <aside>
+            <div className='flex gap-5 px-5 pb5'>
+                <aside className=' h-dvh'>
                     <PanelNav />
                 </aside>
-                <main>
+                <main className='flex justify-end w-full'>
                     {children}
                 </main>
             </div>
