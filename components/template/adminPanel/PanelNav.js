@@ -7,6 +7,7 @@ import axios from 'axios'
 function PanelNav() {
     const pathName = usePathname()
     const [userCount, setUserCount] = useState()
+    const [countBlog, setCountBlog] = useState()
     useEffect(() => {
         const getUserCount = async () => {
             try {
@@ -19,6 +20,21 @@ function PanelNav() {
             } catch (err) { }
         }
         getUserCount()
+    }, [])
+    useEffect(() => {
+        const getBlog = async () => {
+            try {
+                const res = await axios.get("/api/blog/getblogs", {
+                    withCredentials: true
+                })
+                if (res.status === 200) {
+                    setCountBlog(res.data.cuntBlog)
+                }
+            } catch (err) {
+                console.error("خطا در دریافت بلاگ‌ها:", err)
+            }
+        }
+        getBlog()
     }, [])
 
     return (
@@ -51,7 +67,7 @@ function PanelNav() {
                             <svg fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-5 text-[#6B7A99] text-shadow-lg transition ${pathName === "p-admin/blog" ? "rotate-180" : " rotate-0"}`}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                             </svg>
-                            <div className=' p-1 font-vazirBold rounded-full bg-white shadow-xl text-[#6B7A99] min-w-[30px] min-h-[30px] flex items-center justify-center'>{userCount}</div>
+                            <div className=' p-1 font-vazirBold rounded-full bg-white shadow-xl text-[#6B7A99] min-w-[30px] min-h-[30px] flex items-center justify-center'>{countBlog}</div>
                         </div>
                     </div>
                     <ul className={`transition-all duration-200 ${pathName === "p-admin/blog" ? "flex flex-col gap-4 px-2.5 opacity-100 h-full visible" : "opacity-0 h-0 invisible hidden"}`}>

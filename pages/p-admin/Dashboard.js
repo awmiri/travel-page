@@ -9,31 +9,52 @@ function Dashboard() {
         growthPercentage: 0,
         isPositive: true
     })
-    console.log(stats);
+    const [countBlog, setCountBlog] = useState()
+
+    const getUserStats = async () => {
+        try {
+            const res = await axios.get("/api/user/status", {
+                withCredentials: true
+            })
+
+
+            if (res.status === 200) {
+                setStats(res.data)
+            }
+        } catch (err) {
+            console.error(err)
+        }
+    }
+    useEffect(() => {
+        getUserStats()
+        const interval = setInterval(() => {
+            getUserStats()
+        }, 100000)
+
+        return () => clearInterval(interval)
+    }, [])
 
     useEffect(() => {
-        const getUserStats = async () => {
+        const getBlog = async () => {
             try {
-                const res = await axios.get("/api/user/status", {
+                const res = await axios.get("/api/blog/getblogs", {
                     withCredentials: true
                 })
-                console.log(res);
-
                 if (res.status === 200) {
-                    setStats(res.data)
+                    setCountBlog(res.data.cuntBlog)
                 }
             } catch (err) {
-                console.error(err)
+                console.error("خطا در دریافت بلاگ‌ها:", err)
             }
         }
-        getUserStats()
+        getBlog()
     }, [])
 
     return (
         <AdminLayout>
             <div>
-                <div>
-                    <div className='bg-[#33BFFF] w-[220px] p-3 rounded-xl flex items-center justify-between'>
+                <div className='flex items-center gap-10'>
+                    <div className='bg-[#33BFFF] w-[220px] h-[70px] p-3 rounded-xl flex items-center justify-between'>
                         <div>
                             <div className='text-white font-vazirBold flex items-center gap-2'>
                                 <p>مشتریان</p>
@@ -56,7 +77,17 @@ function Dashboard() {
                             </svg>
                         </div>
                     </div>
-                    <div></div>
+                    <div className='bg-[#FFCB33] w-[220px] p-3 rounded-xl flex items-center justify-between'>
+                        <div>
+                            <p className='text-white font-vazirBold'>بلاگ‌‌ها</p>
+                            <p className='text-white font-vazirBold'>{countBlog}</p>
+                        </div>
+                        <div className='bg-white/30 p-1 rounded-xl'>
+                            <svg className="size-8 text-white" aria-hidden="true" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-6 7 2 2 4-4m-5-9v4h4V3h-4Z" />
+                            </svg>
+                        </div>
+                    </div>
                     <div></div>
                     <div></div>
                 </div>
