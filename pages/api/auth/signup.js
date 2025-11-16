@@ -11,7 +11,7 @@ const signup = async (req, res) => {
     await ConnectDb()
 
     try {
-        const { phone, email, password } = req.body
+        const { phone, email, password, name, lastName, blog } = req.body
 
         if (!phone.trim() || !password.trim() || !email.trim()) {
             return res.status(400).json({ message: "value are not completely filled blank" })
@@ -29,7 +29,7 @@ const signup = async (req, res) => {
 
         const allUser = await UserModel.find({})
 
-        const createUser = await UserModel.create({ phone, email, password: hashPass, role: allUser.length > 0 ? "user" : "admin" })
+        const createUser = await UserModel.create({ phone, email, password: hashPass, role: allUser.length > 0 ? "user" : "admin", name, lastName, blog })
         const token = generateToken({ email })
 
         return res.setHeader("set-cookie", serialize("token", token, {

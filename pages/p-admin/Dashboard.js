@@ -62,7 +62,7 @@ function Dashboard() {
     return (
         <AdminLayout>
             <div>
-                <div className='flex items-center  gap-10'>
+                <div className='flex flex-row-reverse items-center  gap-14'>
                     <div className='bg-[#33BFFF] w-[220px] h-[70px] p-3 rounded-xl flex items-center justify-between'>
                         <div>
                             <div className='text-white font-vazirBold flex items-center gap-2'>
@@ -107,9 +107,21 @@ function Dashboard() {
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 10h16m-8-3V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Zm3-7h.01v.01H8V13Zm4 0h.01v.01H12V13Zm4 0h.01v.01H16V13Zm-8 4h.01v.01H8V17Zm4 0h.01v.01H12V17Zm4 0h.01v.01H16V17Z" />
                             </svg>
                         </div>
+                    </div>
+                    <div className='bg-[#E62E7B] w-[220px] p-3 rounded-xl flex items-center justify-between'>
+                        <div>
+                            <p className='text-white font-vazirBold'>بازدید</p>
+                            <p className='text-white font-vazirBold text-sm'>10</p>
+                        </div>
+                        <div className='bg-white/30 p-1 rounded-xl'>
+                            <svg className="size-8 text-white" aria-hidden="true" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" strokeWidth="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
+                                <path stroke="currentColor" strokeWidth="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            </svg>
+
+                        </div>
 
                     </div>
-                    <div></div>
                 </div>
                 <div></div>
             </div>

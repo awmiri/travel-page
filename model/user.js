@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const schema = mongoose.Schema({
     phone: {
@@ -20,6 +20,16 @@ const schema = mongoose.Schema({
     password: {
         type: String,
         required: true,
+    },
+    name: {
+        type: String,
+    },
+    lastName: {
+        type: String,
+    },
+    blog: {
+        type: Schema.Types.ObjectId,
+        ref: "Blog"
     },
     role: {
         type: String,
