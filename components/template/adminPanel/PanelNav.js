@@ -20,6 +20,10 @@ function PanelNav() {
             } catch (err) { }
         }
         getUserCount()
+        const interval = setInterval(() => {
+            getUserCount()
+        }, 1000);
+        return () => clearInterval(interval)
     }, [])
     useEffect(() => {
         const getBlog = async () => {
@@ -38,7 +42,7 @@ function PanelNav() {
     }, [])
 
     return (
-        <div className='w-[250px] h-full bg-gray-100/20 border border-[#EDEFF2] shadow p-3'>
+        <div className='w-[250px]  bg-gray-100/20 border border-[#EDEFF2] shadow p-3'>
             <ul className='flex flex-col gap-4'>
                 <Link href={"/p-admin/dashboard"} className={`flex items-center gap-3 p-2 rounded-lg transition-all ${pathName === "/p-admin/dashboard" ? 'bg-white shadow' : ''}`}>
                     <svg fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="size-7 text-cusOrang">
