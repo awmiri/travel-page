@@ -29,6 +29,12 @@ const schema = mongoose.Schema({
     },
     identifyId: {
         type: String,
+        unique: true,
+        sparse: true,
+    },
+    profile: {
+        type: String,
+        default: null,
     },
     blog: {
         type: Schema.Types.ObjectId,
