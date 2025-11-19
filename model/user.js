@@ -27,6 +27,9 @@ const schema = mongoose.Schema({
     lastName: {
         type: String,
     },
+    identifyId: {
+        type: String,
+    },
     blog: {
         type: Schema.Types.ObjectId,
         ref: "Blog"

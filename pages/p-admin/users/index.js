@@ -1,5 +1,6 @@
 import AdminLayout from '@/components/template/adminPanel/AdminLayout'
 import axios from 'axios'
+import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 
@@ -57,17 +58,17 @@ function AllUser() {
             <AdminLayout>
                 <ToastContainer position='top-center' autoClose={2500} />
                 <div className='flex flex-col justify-between w-full'>
-                    <div className='flex items-center flex-row-reverse w-full gap-10 relative'>
+                    <div className='flex items-center flex-row-reverse w-full gap-10 '>
                         {
                             currentUsers?.map((user) => (
                                 <div key={user._id} className='border border-black/20 shadow-xl rounded-2xl p-3 w-[250px] h-[190px] dark:bg-white/20'>
                                     <div className='flex items-center justify-between'>
                                         <div className='flex items-center gap-1.5'>
-                                            <span>
+                                            <Link href={`/p-admin/users/${user._id}`}>
                                                 <svg className="size-6 text-black/50 hover:text-green-600 transition" aria-hidden="true" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28" />
                                                 </svg>
-                                            </span>
+                                            </Link>
                                             <span>
                                                 <svg className="size-5 text-black/50 hover:text-red-500 transition" aria-hidden="true" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
@@ -120,7 +121,7 @@ function AllUser() {
                                                 <span className='flex justify-end items-center w-full gap-1.5'>
                                                     <span className='text-[12px] font-iranYekanBold'>{user.blog ? user.blog.length : "0"}</span>
                                                     <svg className="size-4 text-black/50 hover:text-black/70 transition" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path fill-rule="evenodd" d="M11 4.717c-2.286-.58-4.16-.756-7.045-.71A1.99 1.99 0 0 0 2 6v11c0 1.133.934 2.022 2.044 2.007 2.759-.038 4.5.16 6.956.791V4.717Zm2 15.081c2.456-.631 4.198-.829 6.956-.791A2.013 2.013 0 0 0 22 16.999V6a1.99 1.99 0 0 0-1.955-1.993c-2.885-.046-4.76.13-7.045.71v15.081Z" clip-rule="evenodd" />
+                                                        <path fillRule="evenodd" d="M11 4.717c-2.286-.58-4.16-.756-7.045-.71A1.99 1.99 0 0 0 2 6v11c0 1.133.934 2.022 2.044 2.007 2.759-.038 4.5.16 6.956.791V4.717Zm2 15.081c2.456-.631 4.198-.829 6.956-.791A2.013 2.013 0 0 0 22 16.999V6a1.99 1.99 0 0 0-1.955-1.993c-2.885-.046-4.76.13-7.045.71v15.081Z" clipRule="evenodd" />
                                                     </svg>
                                                 </span>
 

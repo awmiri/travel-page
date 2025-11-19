@@ -13,7 +13,7 @@ function PageTitle() {
                 <Typewriter
                     options={{
                         strings: [
-                            'دنیا را کشف کنید زندگی را <span class="text-cusBlue">تجربه</span> کنید'
+                            'دنیا را کشف کنید زندگی را <span className="text-cusBlue">تجربه</span> کنید'
                         ],
                         cursor: "|",
                         loop: true,
