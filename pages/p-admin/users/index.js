@@ -1,14 +1,24 @@
 import AdminLayout from '@/components/template/adminPanel/AdminLayout'
+import ConnectDb from '@/config/ConnectDb'
+import UserModel from '@/model/user'
+import { validationToken } from '@/utility/auth'
 import axios from 'axios'
+import { redirect } from 'next/dist/server/api-utils'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 
-function AllUser() {
+function AllUser({ admin }) {
+
+
+
     const [allUser, setAllUsers] = useState([])
     const [openChangeInfoModal, setOpenChangeInfoModal] = useState(false)
+    const [removeUserModal, setRemoveUserModal] = useState(false)
     const [userId, setUserId] = useState(null)
     const [page, setPage] = useState(1);
+
+
 
     useEffect(() => {
         const getUser = async () => {
@@ -32,7 +42,7 @@ function AllUser() {
     }, [])
     const ChangRoleHandler = async (e) => {
         try {
-            const res = await axios.put("/api//admin/changerole", {
+            const res = await axios.put("/api/admin/changerole", {
                 userId: userId._id,
                 role: 'admin'
             }, {
@@ -42,6 +52,20 @@ function AllUser() {
             if (res.status === 200) {
                 toast.success("تغییر نقش موفقیت امیز بود")
                 setOpenChangeInfoModal(false)
+            }
+        } catch (err) {
+
+        }
+    }
+    const DeleteUserHandler = async (e) => {
+        try {
+            const res = await axios.delete(`/api/user/${userId._id}`, {
+                withCredentials: true
+            })
+
+            if (res.status === 200) {
+                toast.success("کاربر یا موفقیت حذف شذ")
+                setRemoveUserModal(false)
             }
         } catch (err) {
 
@@ -69,7 +93,10 @@ function AllUser() {
                                                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28" />
                                                 </svg>
                                             </Link>
-                                            <span>
+                                            <span onClick={() => {
+                                                setUserId(user)
+                                                setRemoveUserModal(true)
+                                            }}>
                                                 <svg className="size-5 text-black/50 hover:text-red-500 transition" aria-hidden="true" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
                                                 </svg>
@@ -83,15 +110,15 @@ function AllUser() {
                                         </div>
                                     </div>
                                     <div className='mt-3'>
-                                        <div className='flex items-center justify-end gap-6'>
+                                        <div className='flex items-center justify-end gap-4'>
                                             <div className='flex flex-col'>
-                                                <span>ali</span>
+                                                <span className={`text-xs font-vazirBold ${user.name ? "text-black/50" : "text-red-500/50"}`}>{user?.name || "نامشخض"}</span>
                                                 <span>21</span>
                                             </div>
-                                            <div className='w-[40px] h-[40px] flex items-center justify-center border border-black/30 rounded-lg '>
+                                            <div className='w-[40px] h-[40px] overflow-hidden flex items-center justify-center border border-black/30 rounded-lg '>
                                                 {
-                                                    user.img ? (
-                                                        <img src={user.img} alt="" />
+                                                    user.profile ? (
+                                                        <img src={user.profile} alt="" />
                                                     ) : (
                                                         <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                             <path stroke="currentColor" strokeWidth="1.5" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -135,7 +162,7 @@ function AllUser() {
                         }
                         <div className={`w-[300px] h-[200px] z-20 absolute rounded-xl inset-0 m-auto ${openChangeInfoModal ? 'bg-white opacity-100 visible' : 'opacity-0 invisible'}`}>
                             {
-                                currentUsers?.role !== "admin" ? (
+                                userId?.role !== "admin" ? (
                                     <div className='p-3 flex flex-col justify-between h-full'>
                                         <p className='text-red-600 text-center font-vazirBold'>ایا میخواهید نقش این کاربر رو به ادمین تغییر بدی؟</p>
                                         <div className=' flex items-center w-full gap-3'>
@@ -147,6 +174,32 @@ function AllUser() {
                                     <div className='p-3 flex flex-col justify-between h-full'>
                                         <p className='text-red-600 text-center font-vazirBold'>شما نمیتوانید نقش ادمین را حذف کنید</p>
                                         <button className='bg-red-600 text-white p-2 flex items-center justify-center rounded-2xl font-iranYekanBold hover:bg-red-500 transition' onClick={() => setOpenChangeInfoModal(false)}>بستن</button>
+                                    </div>
+                                )
+
+                            }
+                        </div>
+                        <div className={`w-[300px] h-[200px] z-20 absolute rounded-xl inset-0 m-auto ${removeUserModal ? 'bg-white opacity-100 visible' : 'opacity-0 invisible'}`}>
+                            {
+                                userId?._id === admin._id ? (
+                                    <div className='p-3 flex flex-col justify-between h-full'>
+                                        <p className='text-red-600 text-center font-vazirBold'>شما نمیتوانید خود را از لیست حذف کنید</p>
+                                        <div className=' flex items-center w-full gap-3'>
+                                            <button className='bg-red-600 w-full text-white p-2 flex items-center justify-center rounded-2xl font-iranYekanBold hover:bg-red-500 transition' onClick={() => setRemoveUserModal(false)}>بستن</button>
+                                        </div>
+                                    </div>
+                                ) : userId?.role === "admin" ? (
+                                    <div className='p-3 flex flex-col justify-between h-full'>
+                                        <p className='text-red-600 text-center font-vazirBold'>شما نمیتوانید نقش ادمین را حذف کنید</p>
+                                        <button className='bg-red-600 text-white p-2 flex items-center justify-center rounded-2xl font-iranYekanBold hover:bg-red-500 transition' onClick={() => setRemoveUserModal(false)}>بستن</button>
+                                    </div>
+                                ) : (
+                                    <div className='p-3 flex flex-col justify-between h-full'>
+                                        <p className='text-red-600 text-center font-vazirBold'>ایا از حذف این کاربر اطمینان دارین؟</p>
+                                        <div className=' flex items-center w-full gap-3'>
+                                            <button className='bg-green-600 w-full text-white p-2 flex items-center justify-center rounded-2xl font-iranYekanBold hover:bg-green-500 transition' onClick={DeleteUserHandler} >بله</button>
+                                            <button className='bg-red-600 w-full text-white p-2 flex items-center justify-center rounded-2xl font-iranYekanBold hover:bg-red-500 transition' onClick={() => setRemoveUserModal(false)}>خیر</button>
+                                        </div>
                                     </div>
                                 )
 
@@ -165,8 +218,50 @@ function AllUser() {
                 </div>
             </AdminLayout>
             <div className={`w-full h-full absolute top-0 z-10 transition-all ${openChangeInfoModal ? 'bg-black/20 opacity-100 visible' : 'opacity-0 invisible'}`} onClick={() => setOpenChangeInfoModal(false)} ></div>
+            <div className={`w-full h-full absolute top-0 z-10 transition-all ${removeUserModal ? 'bg-black/20 opacity-100 visible' : 'opacity-0 invisible'}`} onClick={() => setRemoveUserModal(false)} ></div>
         </>
     )
+}
+
+export async function getServerSideProps(context) {
+    const { req } = context;
+    await ConnectDb()
+
+    const { ["token"]: token } = req.cookies
+
+    if (!token) {
+        return {
+            redirect: {
+                destination: "/login"
+            }
+        }
+    }
+
+    const isValid = validationToken(token)
+    if (!isValid) {
+        return {
+            redirect: {
+                destination: "/login"
+            }
+        }
+    }
+
+    const getAlreadyAdmin = await UserModel.findOne({ email: isValid.email }, "-password").lean()
+
+    if (!getAlreadyAdmin || getAlreadyAdmin.role !== "admin") {
+        return {
+            redirect: {
+                destination: "/login"
+            }
+        }
+
+    }
+
+    return {
+        props: {
+            admin: JSON.parse(JSON.stringify(getAlreadyAdmin))
+        }
+    }
 }
 
 export default AllUser
