@@ -16,6 +16,8 @@ function Header() {
     const [userAdmin, setUserAdmin] = useState(false)
     const [userLogin, setUserLogin] = useState(false)
     const [userContent, setUserContent] = useState({})
+    console.log(userContent);
+
     const router = useRouter()
     console.log(userContent);
 
@@ -82,12 +84,12 @@ function Header() {
                             <Image src={"/logo/logo.webp"} width={35} height={35} alt='logo' />
                             <Link href={"/"} className='cursor-pointer   font-iranYekanBold text-textLight dark:text-white text-base md:text-lg query860:text-xl query1000:text-[22px] query1120:text-2xl'>سفرکن</Link>
                         </li>
-                        <li className='cursor-pointer    p-1 md:p-1.5 query860:p-2.5 font-iranYekanRegular text-textLight dark:text-white text-[13px] md:text-[15px] query860:text-base query1000:text-lg query1120:text-xl nav_animation'>هتل</li>
-                        <li className='cursor-pointer    p-1 md:p-1.5 query860:p-2.5 font-iranYekanRegular text-textLight dark:text-white text-[13px] md:text-[15px] query860:text-base query1000:text-lg query1120:text-xl nav_animation'>تور داخلی</li>
-                        <li className='cursor-pointer    p-1 md:p-1.5 query860:p-2.5 font-iranYekanRegular text-textLight dark:text-white text-[13px] md:text-[15px] query860:text-base query1000:text-lg query1120:text-xl nav_animation'>تور خارجی</li>
-                        <li className='cursor-pointer    p-1 md:p-1.5 query860:p-2.5 font-iranYekanRegular text-textLight dark:text-white text-[13px] md:text-[15px] query860:text-base query1000:text-lg query1120:text-xl nav_animation'>بیمه مسافرتی</li>
-                        <li className='cursor-pointer    p-1 md:p-1.5 query860:p-2.5 font-iranYekanRegular text-textLight dark:text-white text-[13px] md:text-[15px] query860:text-base query1000:text-lg query1120:text-xl nav_animation'>سفرنامه</li>
-                        <li className='cursor-pointer    p-1 md:p-1.5 query860:p-2.5 font-iranYekanRegular text-textLight dark:text-white'>
+                        <li className='cursor-pointer p-1 md:p-1.5 query860:p-2.5 font-iranYekanRegular text-textLight dark:text-white text-[13px] md:text-[15px] query860:text-base query1000:text-lg query1120:text-xl nav_animation'>هتل</li>
+                        <li className='cursor-pointer p-1 md:p-1.5 query860:p-2.5 font-iranYekanRegular text-textLight dark:text-white text-[13px] md:text-[15px] query860:text-base query1000:text-lg query1120:text-xl nav_animation'>تور داخلی</li>
+                        <li className='cursor-pointer p-1 md:p-1.5 query860:p-2.5 font-iranYekanRegular text-textLight dark:text-white text-[13px] md:text-[15px] query860:text-base query1000:text-lg query1120:text-xl nav_animation'>تور خارجی</li>
+                        <li className='cursor-pointer p-1 md:p-1.5 query860:p-2.5 font-iranYekanRegular text-textLight dark:text-white text-[13px] md:text-[15px] query860:text-base query1000:text-lg query1120:text-xl nav_animation'>بلاگ‌ها</li>
+                        <li className='cursor-pointer p-1 md:p-1.5 query860:p-2.5 font-iranYekanRegular text-textLight dark:text-white text-[13px] md:text-[15px] query860:text-base query1000:text-lg query1120:text-xl nav_animation'>سفرنامه</li>
+                        <li className='cursor-pointer p-1 md:p-1.5 query860:p-2.5 font-iranYekanRegular text-textLight dark:text-white'>
                             <svg viewBox="0 0 24 24" fill="currentColor" className="size-4 md:size-5">
                                 <path fillRule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clipRule="evenodd" />
                             </svg>
@@ -108,7 +110,7 @@ function Header() {
                             <li className='p-2.5 font-iranYekanRegular text-textLight dark:text-white text-sm'>هتل</li>
                             <li className='p-2.5 font-iranYekanRegular text-textLight dark:text-white text-sm'>تور داخلی</li>
                             <li className='p-2.5 font-iranYekanRegular text-textLight dark:text-white text-sm'>تور خارجی</li>
-                            <li className='p-2.5 font-iranYekanRegular text-textLight dark:text-white text-sm'>بیمه مسافرتی</li>
+                            <li className='p-2.5 font-iranYekanRegular text-textLight dark:text-white text-sm'>بلاگ‌ها</li>
                             <li className='p-2.5 font-iranYekanRegular text-textLight dark:text-white text-sm'>سفرنامه</li>
                         </ul>
                     </div>
@@ -137,10 +139,18 @@ function Header() {
                         {
                             userLogin ? (
                                 <>
-                                    <div className='w-[48px] h-[48px] relative z-30 border flex items-center justify-center p-1.5 md:p-2 rounded-full' onClick={() => setOpenUserInfo((prev) => !prev)}>
-                                        <svg className="size-9 text-gray-800 dark:text-white" aria-hidden="true" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" strokeWidth="1" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                        </svg>
+                                    <div className='w-[48px] h-[48px] relative z-30 border flex items-center justify-center rounded-full' onClick={() => setOpenUserInfo((prev) => !prev)}>
+                                        {
+                                            userContent.profile ? (
+
+                                                <img src={userContent.profile} alt="" className='w-full h-full object-cover rounded-full' />
+                                            ) : (
+                                                <svg className="size-9 text-gray-800 dark:text-white" aria-hidden="true" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" strokeWidth="1" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                                </svg>
+
+                                            )
+                                        }
                                         <div className={`w-[220px] ${openUserInfo ? "opacity-100 visible" : "opacity-0 invisible"} transition-all p-3 bg-cusBlue text-white absolute z-20 -bottom-[310px] -right-[170px] rounded-2xl`} openUserInfo>
                                             <div>
                                                 <h5 className='mb-3 font-vazirBold text-[17px]'>خوش امدید</h5>
@@ -192,9 +202,10 @@ function Header() {
                         }
                     </div>
                 </div>
-            </div>
+            </div >
             {/* bg cus dark */}
-            <div className={`bg-black/15 absolute z-10 w-full h-dvh top-0 sm:hidden transition-all duration-200 ${openMobileNav ? 'opacity-100 visible' : 'opacity-0 invisible'}`} onClick={() => setOpenMobileNav(false)}></div>
+            <div div className={`bg-black/15 absolute z-10 w-full h-dvh top-0 sm:hidden transition-all duration-200 ${openMobileNav ? 'opacity-100 visible' : 'opacity-0 invisible'}`
+            } onClick={() => setOpenMobileNav(false)}></div  >
             <div className={`bg-[#0006]/30 backdrop-blur-[1px] absolute z-10 w-full h-dvh top-0  transition-all duration-200 ${openUserInfo ? 'opacity-100 visible' : 'opacity-0 invisible'}`} onClick={() => setOpenUserInfo(false)}></div>
         </>
     )

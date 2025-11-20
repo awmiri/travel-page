@@ -5,9 +5,10 @@ import { validationToken } from '@/utility/auth'
 import React from 'react'
 
 const index = ({ data }) => {
+
     return (
         <>
-            <AdminLayout information={data} />
+            <AdminLayout />
         </>
 
     )

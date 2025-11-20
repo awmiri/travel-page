@@ -29,13 +29,6 @@ const schema = mongoose.Schema({
         type: String,
         default: null,
         trim: true
-    },
-    url: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true,
-        lowercase: true,
     }
 }, {
     timestamps: true
