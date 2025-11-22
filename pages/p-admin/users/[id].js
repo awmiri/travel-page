@@ -30,7 +30,6 @@ function FindUser({ user: initialUser }) {
 
     const [preview, setPreview] = useState(user?.profile || null)
     const handleProfileChange = (e) => {
-
         const file = e.target.files[0]
         if (!file) return;
 

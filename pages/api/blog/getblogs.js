@@ -9,22 +9,6 @@ const GrtAllBlogs = async (req, res) => {
     }
     try {
         await ConnectDb()
-        const { ["token"]: token } = req.cookies
-        if (!token) {
-            return res.status(401).json({ message: "token not provided" })
-        }
-        const checkValidateToken = validationToken(token)
-        if (!checkValidateToken) {
-            return res.status(423).json({ message: "you haven't the legal token" })
-        }
-        const findUser = await UserModel.findOne({ email: checkValidateToken.email })
-        if (!findUser) {
-            return res.status(404).json({ message: "user not found" })
-        }
-
-        if (findUser.role !== "admin") {
-            return res.status(430).json({ message: "your role is not admin" })
-        }
         const getAllBlog = await BlogModel.find({})
 
         return res.status(200).json({

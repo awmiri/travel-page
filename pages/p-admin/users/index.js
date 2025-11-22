@@ -1,5 +1,6 @@
 import AdminLayout from '@/components/template/adminPanel/AdminLayout'
 import ConnectDb from '@/config/ConnectDb'
+import BlogModel from '@/model/blog'
 import UserModel from '@/model/user'
 import { validationToken } from '@/utility/auth'
 import axios from 'axios'
@@ -9,6 +10,8 @@ import React, { useEffect, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 
 function AllUser({ admin }) {
+    console.log(admin);
+
 
 
 
@@ -246,7 +249,11 @@ export async function getServerSideProps(context) {
         }
     }
 
-    const getAlreadyAdmin = await UserModel.findOne({ email: isValid.email }, "-password").lean()
+    const getAlreadyAdmin = await UserModel.findOne({ email: isValid.email }, "-password")
+    const blogs = await BlogModel.find({ author: getAlreadyAdmin._id });
+    console.log(getAlreadyAdmin);
+    console.log(blogs);
+
 
     if (!getAlreadyAdmin || getAlreadyAdmin.role !== "admin") {
         return {
