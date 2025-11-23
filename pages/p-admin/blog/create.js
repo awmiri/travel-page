@@ -66,11 +66,11 @@ function Create() {
         <AdminLayout>
             <ToastContainer />
             <div className=' flex items-start justify-center w-full'>
-                <div class="flex flex-col items-center justify-center bg-cusBlue rounded-2xl w-[400px]">
-                    <div class="w-full max-w-md shadow-md p-6">
-                        <h2 class="text-2xl font-vazirBold mb-4 text-white">ثبت بلاگ</h2>
+                <div className="flex flex-col items-center justify-center bg-cusBlue rounded-2xl w-[400px]">
+                    <div className="w-full max-w-md shadow-md p-6">
+                        <h2 className="text-2xl font-vazirBold mb-4 text-white">ثبت بلاگ</h2>
 
-                        <form class="flex flex-col flex-wrap">
+                        <form className="flex flex-col flex-wrap">
                             <input
                                 type="text"
                                 value={title}
@@ -106,15 +106,15 @@ function Create() {
                                             </div>
                                         </>
                                     ) : (
-                                        <div class="md:flex">
-                                            <div class="w-full">
-                                                <div class="relative h-40 rounded-2xl border-2 border-white bg-white/50 flex justify-center items-center shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
-                                                    <div class="absolute flex flex-col items-center">
-                                                        <img alt="File Icon" class="mb-3" src="https://img.icons8.com/dusk/64/000000/file.png" />
-                                                        <span class="block text-gray-500 font-semibold">Drag &amp; drop your files here</span>
-                                                        <span class="block text-white font-normal mt-1"> or click to upload</span>
+                                        <div className="md:flex">
+                                            <div className="w-full">
+                                                <div className="relative h-40 rounded-2xl border-2 border-white bg-white/50 flex justify-center items-center shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                                                    <div className="absolute flex flex-col items-center">
+                                                        <img alt="File Icon" className="mb-3" src="https://img.icons8.com/dusk/64/000000/file.png" />
+                                                        <span className="block text-gray-500 font-semibold">Drag &amp; drop your files here</span>
+                                                        <span className="block text-white font-normal mt-1"> or click to upload</span>
                                                     </div>
-                                                    <input id='img' name="" class="h-full w-full opacity-0 cursor-pointer" type="file" accept="image/*"
+                                                    <input id='img' name="" className="h-full w-full opacity-0 cursor-pointer" type="file" accept="image/*"
                                                         onChange={handlerAddImg} />
                                                 </div>
                                             </div>
@@ -123,7 +123,7 @@ function Create() {
                                 }
                             </div>
 
-                            <button disabled={disabledBtn} onClick={createBlog} class="bg-cusOrang disabled:bg-cusOrang/20 mt-5 p-2.5 rounded-lg text-white font-vazirBold cursor-pointer hover:bg-cusOrang/95 transition">
+                            <button disabled={disabledBtn} onClick={createBlog} className="bg-cusOrang disabled:bg-cusOrang/20 mt-5 p-2.5 rounded-lg text-white font-vazirBold cursor-pointer hover:bg-cusOrang/95 transition">
                                 ساخت بلاگ
                             </button>
                         </form>

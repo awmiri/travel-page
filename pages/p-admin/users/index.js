@@ -9,13 +9,10 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 
-function AllUser({ admin }) {
-    console.log(admin);
+function AllUser({ admin, allAdmin }) {
+    const [allUser, setAllUsers] = useState(allAdmin)
+    console.log(allAdmin);
 
-
-
-
-    const [allUser, setAllUsers] = useState([])
     const [openChangeInfoModal, setOpenChangeInfoModal] = useState(false)
     const [removeUserModal, setRemoveUserModal] = useState(false)
     const [userId, setUserId] = useState(null)
@@ -23,26 +20,7 @@ function AllUser({ admin }) {
 
 
 
-    useEffect(() => {
-        const getUser = async () => {
-            try {
-                const res = await axios.get("/api/user")
-                if (res.status === 200) {
 
-                    setAllUsers(res.data.data)
-                }
-            } catch (err) {
-                console.log(err);
-
-            }
-        }
-        getUser()
-        const interval = setInterval(() => {
-            getUser()
-        }, 10000)
-
-        return () => clearInterval(interval)
-    }, [])
     const ChangRoleHandler = async (e) => {
         try {
             const res = await axios.put("/api/admin/changerole", {
@@ -116,7 +94,6 @@ function AllUser({ admin }) {
                                         <div className='flex items-center justify-end gap-4'>
                                             <div className='flex flex-col'>
                                                 <span className={`text-xs font-vazirBold ${user.name ? "text-black/50" : "text-red-500/50"}`}>{user?.name || "نامشخض"}</span>
-                                                <span>21</span>
                                             </div>
                                             <div className='w-[40px] h-[40px] overflow-hidden flex items-center justify-center border border-black/30 rounded-lg '>
                                                 {
@@ -149,7 +126,7 @@ function AllUser({ admin }) {
                                         {
                                             user.role === "admin" ? (
                                                 <span className='flex justify-end items-center w-full gap-1.5'>
-                                                    <span className='text-[12px] font-iranYekanBold'>{user.blog ? user.blog.length : "0"}</span>
+                                                    <span className='text-[12px] font-iranYekanBold'>{user?.blogs ? user.blogs.length : "0"}</span>
                                                     <svg className="size-4 text-black/50 hover:text-black/70 transition" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
                                                         <path fillRule="evenodd" d="M11 4.717c-2.286-.58-4.16-.756-7.045-.71A1.99 1.99 0 0 0 2 6v11c0 1.133.934 2.022 2.044 2.007 2.759-.038 4.5.16 6.956.791V4.717Zm2 15.081c2.456-.631 4.198-.829 6.956-.791A2.013 2.013 0 0 0 22 16.999V6a1.99 1.99 0 0 0-1.955-1.993c-2.885-.046-4.76.13-7.045.71v15.081Z" clipRule="evenodd" />
                                                     </svg>
@@ -228,47 +205,55 @@ function AllUser({ admin }) {
 
 export async function getServerSideProps(context) {
     const { req } = context;
-    await ConnectDb()
 
-    const { ["token"]: token } = req.cookies
+    await ConnectDb();
+
+    const token = req.cookies?.token || null;
 
     if (!token) {
         return {
             redirect: {
-                destination: "/login"
+                destination: "/login",
+                permanent: false
             }
-        }
+        };
     }
 
-    const isValid = validationToken(token)
+    const isValid = validationToken(token);
+
     if (!isValid) {
         return {
             redirect: {
-                destination: "/login"
+                destination: "/login",
+                permanent: false
             }
-        }
+        };
     }
 
-    const getAlreadyAdmin = await UserModel.findOne({ email: isValid.email }, "-password")
-    const blogs = await BlogModel.find({ author: getAlreadyAdmin._id });
-    console.log(getAlreadyAdmin);
-    console.log(blogs);
+    const getAlreadyAdmin = await UserModel.findOne({ email: isValid.email })
+        .select("-password").populate('blogs');
+
+    const getAllAdmin = await UserModel.find({})
+        .select("-password").populate('blogs');
+    console.log(getAllAdmin);
 
 
     if (!getAlreadyAdmin || getAlreadyAdmin.role !== "admin") {
         return {
             redirect: {
-                destination: "/login"
+                destination: "/login",
+                permanent: false
             }
-        }
-
+        };
     }
 
     return {
         props: {
-            admin: JSON.parse(JSON.stringify(getAlreadyAdmin))
+            admin: getAlreadyAdmin ? JSON.parse(JSON.stringify(getAlreadyAdmin)) : null,
+            allAdmin: getAllAdmin ? JSON.parse(JSON.stringify(getAllAdmin)) : null
         }
-    }
+    };
 }
+
 
 export default AllUser

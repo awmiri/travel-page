@@ -1,6 +1,5 @@
-import UserModel from "./user";
 
-const { default: mongoose, Schema } = require("mongoose");
+import mongoose, { Schema } from "mongoose";
 
 const schema = mongoose.Schema({
     title: {
@@ -34,6 +33,6 @@ const schema = mongoose.Schema({
     timestamps: true
 })
 
-const BlogModel = mongoose.models.Blog || mongoose.model("Blog", schema)
+const BlogModel = mongoose.models?.Blog || mongoose.model("Blog", schema)
 
 export default BlogModel

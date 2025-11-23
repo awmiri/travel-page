@@ -1,5 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
+
+
 const schema = mongoose.Schema({
     phone: {
         type: String,
@@ -36,17 +38,20 @@ const schema = mongoose.Schema({
         type: String,
         default: null,
     },
-    blog: {
-        type: Schema.Types.ObjectId,
-        ref: "Blog"
-    },
     role: {
         type: String,
         required: true,
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 })
+schema.virtual('blogs', {
+    ref: 'Blog',
+    localField: '_id',
+    foreignField: 'author'
+});
 
 const UserModel = mongoose.models.User || mongoose.model("User", schema)
 
