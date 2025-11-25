@@ -23,16 +23,18 @@ const publishBlog = async (req, res) => {
             return res.status(400).json({ message: "Author ID and Blog ID are required" });
         }
 
-        const getAdmin = await UserModel.find({ email: validate.email })
+        const getAdmin = await UserModel.findOne({ email: validate.email })
         if (!getAdmin) {
             return res.status(404).json({ message: "user not found" })
         }
+        console.log(getAdmin._id);
+        console.log(author);
 
-        if (getAdmin._id !== author) {
+        if (getAdmin._id.toString() !== author.toString()) {
             return res.status(405).json({ message: "your not the writer of this blog" })
         }
         const upDateBlog = await BlogModel.findOneAndUpdate({ _id: blogId }, { publish: true }, { new: true })
-        if (!blog) {
+        if (!upDateBlog) {
             return res.status(404).json({
                 message: "Blog not found or you don't have permission to publish it"
             });
@@ -40,7 +42,7 @@ const publishBlog = async (req, res) => {
         return res.status(200).json({
             success: true,
             message: "Blog published successfully",
-            blog,
+            upDateBlog,
         });
     } catch (error) {
         console.error("Error in publishBlog API:", error);

@@ -1,15 +1,40 @@
 import React, { useState } from 'react'
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import Link from 'next/link';
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
 
 
 function Table({ blogs }) {
     const [openModal, setOpenModal] = useState(false)
-    const publishBlogHandler = (id) => {
-        setOpenModal(true)
+    const [blogId, setBlogId] = useState(false)
+    const [author, setAuthor] = useState(false)
+    const publishBlogHandler = async () => {
+        try {
+            const data = {
+                blogId,
+                author
+            }
+            const res = await axios.patch("/api/blog/publishblog", data)
+            if (res.status === 200) {
+                toast.success("بلاگ با موفقیت منتشر شد")
+                openModal(false)
+            }
+        } catch (err) {
+            const status = err.response?.status
+            if (status === 405) {
+                toast.success("این بلاگ توسط شما نوشته نشده")
+            } else if (status === 404) {
+                toast.success("کاربر یا بلاگ پیدا نشده")
+            } else if (status === 400) {
+                toast.success("فیلدا به درستی پرنشدن")
+            }
+
+        }
     }
     return (
         <>
+            <ToastContainer autoClose={2500} />
             <div className="relative rounded-2xl overflow-x-auto bg-cusBlue/20 shadow border border-black/30">
                 <div className="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 p-4">
                     <div>
@@ -62,7 +87,7 @@ function Table({ blogs }) {
                         {
                             blogs ? (
                                 blogs.map((item) => (
-                                    <tr className="bg-neutral-primary-soft border-b border-black/30 hover:bg-cusBlue/40">
+                                    <tr key={item._id} className="bg-neutral-primary-soft border-b border-black/30 hover:bg-cusBlue/40">
                                         <th scope="row" className="flex items-center px-6 py-4 text-heading whitespace-nowrap font-vazirBold text-[13px]">
                                             <p className='hover:text-black/50'>{item.title}</p>
                                         </th>
@@ -78,7 +103,11 @@ function Table({ blogs }) {
                                                 item.publish ? (
                                                     <p className='p-2 text-sm font-iranYekanBold bg-green-500 text-white flex items-center justify-center rounded-2xl'>منتشر‌شده</p>
                                                 ) : (
-                                                    <p className='p-2 text-sm font-iranYekanBold cursor-pointer bg-red-500 hover:bg-red-500/50 transition-all text-white flex items-center justify-center rounded-2xl' onClick={() => publishBlogHandler(item._id)}>منتشر‌نشده</p>
+                                                    <p className='p-2 text-sm font-iranYekanBold cursor-pointer bg-red-500 hover:bg-red-500/50 transition-all text-white flex items-center justify-center rounded-2xl' onClick={() => {
+                                                        setBlogId(item._id)
+                                                        setAuthor(item.author._id)
+                                                        setOpenModal(true)
+                                                    }}>منتشر‌نشده</p>
                                                 )
                                             }
                                         </td>
@@ -105,21 +134,19 @@ function Table({ blogs }) {
                     </tbody>
                 </table>
             </div>
-            {
-                <div className='bg-white absolute inset-0 m-auto w-[270px] h-[160px] top-0 p-2.5 z-20 rounded-xl'>
-                    <div className='w-full flex items-end justify-end ' onClick={() => setOpenModal(false)}>
-                        <svg viewBox="0 0 24 24" fill="currentColor" className="size-6 text-black/60 hover:text-red-600 transition">
-                            <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clipRule="evenodd" />
-                        </svg>
-                    </div>
-                    <p className='text-center font-iranYekanBold mt-5'>ایا از انتشار این بلاگ اطمینان دارید؟</p>
-                    <div className='flex items-center justify-between gap-3 mt-5'>
-                        <button className='p-2 bg-green-600 text-white w-full rounded-2xl'>بله</button>
-                        <button className='p-2 bg-red-500 text-white w-full rounded-2xl'>خیر</button>
-                    </div>
+            <div className={`bg-white absolute inset-0 m-auto w-[270px] h-[160px] top-0 p-2.5 z-20 rounded-xl transition ${openModal ? "opacity-100 visible" : "opacity-0 invisible"}`}>
+                <div className='w-full flex items-end justify-end '>
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="size-6 text-black/60 hover:text-red-600 transition" onClick={() => setOpenModal(false)}>
+                        <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clipRule="evenodd" />
+                    </svg>
                 </div>
-            }
-            <div className='bg-darkFooterBg/50 w-full h-full absolute inset-0 z-10'></div>
+                <p className='text-center font-iranYekanBold mt-5'>ایا از انتشار این بلاگ اطمینان دارید؟</p>
+                <div className='flex items-center justify-between gap-3 mt-5'>
+                    <button className='p-2 bg-green-600 hover:bg-green-600/80 transition duration-200 text-white w-full rounded-2xl' onClick={publishBlogHandler}>بله</button>
+                    <button className='p-2 bg-red-500 hover:bg-red-500/80 transition duration-200 text-white w-full rounded-2xl'>خیر</button>
+                </div>
+            </div>
+            <div className={`${openModal ? 'bg-darkFooterBg/50 opacity-100 visible' : 'invisible opacity-0'} transition w-full h-full absolute inset-0 z-10`} onClick={() => setOpenModal(false)}></div>
         </>
 
     )
