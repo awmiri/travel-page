@@ -1,8 +1,12 @@
 import React from 'react'
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import Link from 'next/link';
 
-function Table() {
+
+function Table({ blogs }) {
+    console.log(blogs);
+    const publishBlogHandler = () => { }
     return (
-
         <div className="relative rounded-2xl overflow-x-auto bg-cusBlue/20 shadow border border-black/30">
             <div className="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 p-4">
                 <div>
@@ -37,154 +41,64 @@ function Table() {
             <table className="w-full text-sm text-left rtl:text-right text-body">
                 <thead className="text-sm text-body bg-neutral-secondary-medium border-b border-t border-black/30">
                     <tr>
-                        <th scope="col" className="p-4">
-                            <div className="flex items-center">
-                                <label for="table-checkbox-51" className="sr-only">Table checkbox</label>
-                            </div>
+                        <th scope="col" className="px-6 py-3 font-medium">
+                            عنوان مغاله
                         </th>
                         <th scope="col" className="px-6 py-3 font-medium">
-                            Name
+                            نویسنده
                         </th>
                         <th scope="col" className="px-6 py-3 font-medium">
-                            Position
+                            تاریخ انتشار
                         </th>
                         <th scope="col" className="px-6 py-3 font-medium">
-                            Status
-                        </th>
-                        <th scope="col" className="px-6 py-3 font-medium">
-                            Action
+                            وضعیت انتشار
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr className="bg-neutral-primary-soft border-b border-black/30 hover:bg-cusBlue/40">
-                        <td className="w-4 p-4">
-                            <div className="flex items-center">
-                                <label for="table-checkbox-52" className="sr-only">Table checkbox</label>
-                            </div>
-                        </td>
-                        <th scope="row" className="flex items-center px-6 py-4 text-heading whitespace-nowrap">
-                            <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Jese image" />
-                            <div className="ps-3">
-                                <div className="text-base font-semibold">Neil Sims</div>
-                                <div className="font-normal text-body">neil.sims@flowbite.com</div>
-                            </div>
-                        </th>
-                        <td className="px-6 py-4">
-                            React Developer
-                        </td>
-                        <td className="px-6 py-4">
-                            <div className="flex items-center">
-                                <div className="h-2.5 w-2.5 rounded-full bg-success me-2"></div> Online
-                            </div>
-                        </td>
-                        <td className="px-6 py-4">
+                <tbody className={`${!blogs ? ' flex items-center justify-center w-full' : ''}`}>
+                    {
+                        blogs ? (
+                            blogs.map((item) => (
+                                <tr className="bg-neutral-primary-soft border-b border-black/30 hover:bg-cusBlue/40">
+                                    <th scope="row" className="flex items-center px-6 py-4 text-heading whitespace-nowrap font-vazirBold text-[13px]">
+                                        <p className='hover:text-black/50'>{item.title}</p>
+                                    </th>
+                                    <td className="px-6 py-4">
+                                        <p className='font-iranYekanBold text-sm'>{item.author.name} {item.author.lastName}</p>
+                                        <p className='font-iranYekanBold text-xs text-black/50 mt-1'>{item.author._id}</p>
+                                    </td>
+                                    <td className="px-6 py-4 font-iranYekanBold text-sm">
+                                        {new Date(item.updatedAt).toLocaleDateString('fa-IR')}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {
+                                            item.publish ? (
+                                                <p className='p-2 text-sm font-iranYekanBold bg-green-500 text-white flex items-center justify-center rounded-2xl'>منتشر‌شده</p>
+                                            ) : (
+                                                <p className='p-2 text-sm font-iranYekanBold bg-red-500 text-white flex items-center justify-center rounded-2xl' onClick={() => publishBlogHandler(item._id)}>منتشر‌نشده</p>
+                                            )
+                                        }
+                                    </td>
+                                </tr>
+                            ))
 
-                            <a href="#" type="button" data-modal-target="editUserModal" data-modal-show="editUserModal" className="font-medium text-fg-brand hover:underline">Edit user</a>
-                        </td>
-                    </tr>
-                    <tr className="bg-neutral-primary-soft border-b border-black/30 hover:bg-cusBlue/40">
-                        <td className="w-4 p-4">
-                            <div className="flex items-center">
-                                <label for="table-checkbox-53" className="sr-only">Table checkbox</label>
-                            </div>
-                        </td>
-                        <th scope="row" className="flex items-center px-6 py-4 font-medium text-heading whitespace-nowrap">
-                            <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="Jese image" />
-                            <div className="ps-3">
-                                <div className="text-base font-semibold">Bonnie Green</div>
-                                <div className="font-normal text-body">bonnie@flowbite.com</div>
-                            </div>
-                        </th>
-                        <td className="px-6 py-4">
-                            Designer
-                        </td>
-                        <td className="px-6 py-4">
-                            <div className="flex items-center">
-                                <div className="h-2.5 w-2.5 rounded-full bg-success me-2"></div> Online
-                            </div>
-                        </td>
-                        <td className="px-6 py-4">
-                            <a href="#" type="button" data-modal-show="editUserModal" className="font-medium text-fg-brand hover:underline">Edit user</a>
-                        </td>
-                    </tr>
-                    <tr className="bg-neutral-primary-soft border-b border-black/30 hover:bg-cusBlue/40">
-                        <td className="w-4 p-4">
-                            <div className="flex items-center">
-                                <label for="table-checkbox-54" className="sr-only">Table checkbox</label>
-                            </div>
-                        </td>
-                        <th scope="row" className="flex items-center px-6 py-4 font-medium text-heading whitespace-nowrap">
-                            <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-2.jpg" alt="Jese image" />
-                            <div className="ps-3">
-                                <div className="text-base font-semibold">Jese Leos</div>
-                                <div className="font-normal text-body">jese@flowbite.com</div>
-                            </div>
-                        </th>
-                        <td className="px-6 py-4">
-                            Vue JS Developer
-                        </td>
-                        <td className="px-6 py-4">
-                            <div className="flex items-center">
-                                <div className="h-2.5 w-2.5 rounded-full bg-success me-2"></div> Online
-                            </div>
-                        </td>
-                        <td className="px-6 py-4">
-
-                            <a href="#" type="button" data-modal-show="editUserModal" className="font-medium text-fg-brand hover:underline">Edit user</a>
-                        </td>
-                    </tr>
-                    <tr className="bg-neutral-primary-soft border-b border-black/30 hover:bg-cusBlue/40">
-                        <td className="w-4 p-4">
-                            <div className="flex items-center">
-                                <label for="table-checkbox-55" className="sr-only">Table checkbox</label>
-                            </div>
-                        </td>
-                        <th scope="row" className="flex items-center px-6 py-4 font-medium text-heading whitespace-nowrap">
-                            <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="Jese image" />
-                            <div className="ps-3">
-                                <div className="text-base font-semibold">Thomas Lean</div>
-                                <div className="font-normal text-body">thomas@flowbite.com</div>
-                            </div>
-                        </th>
-                        <td className="px-6 py-4">
-                            UI/UX Engineer
-                        </td>
-                        <td className="px-6 py-4">
-                            <div className="flex items-center">
-                                <div className="h-2.5 w-2.5 rounded-full bg-success me-2"></div> Online
-                            </div>
-                        </td>
-                        <td className="px-6 py-4">
-
-                            <a href="#" type="button" data-modal-show="editUserModal" className="font-medium text-fg-brand hover:underline">Edit user</a>
-                        </td>
-                    </tr>
-                    <tr className="bg-neutral-primary-soft hover:bg-neutral-secondary-medium">
-                        <td className="w-4 p-4">
-                            <div className="flex items-center">
-                                <label for="table-checkbox-56" className="sr-only">Table checkbox</label>
-                            </div>
-                        </td>
-                        <th scope="row" className="flex items-center px-6 py-4 font-medium text-heading whitespace-nowrap">
-                            <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-4.jpg" alt="Jese image" />
-                            <div className="ps-3">
-                                <div className="text-base font-semibold">Leslie Livingston</div>
-                                <div className="font-normal text-body">leslie@flowbite.com</div>
-                            </div>
-                        </th>
-                        <td className="px-6 py-4">
-                            SEO Specialist
-                        </td>
-                        <td className="px-6 py-4">
-                            <div className="flex items-center">
-                                <div className="h-2.5 w-2.5 rounded-full bg-danger me-2"></div> Offline
-                            </div>
-                        </td>
-                        <td className="px-6 py-4">
-                            <a href="#" type="button" data-modal-show="editUserModal" className="font-medium text-fg-brand hover:underline">Edit user</a>
-                        </td>
-                    </tr>
+                        ) : (
+                            <tr>
+                                <td colSpan="4" className="py-10 text-center">
+                                    <div className="flex flex-col items-center justify-center space-y-5">
+                                        <DotLottieReact
+                                            src="https://lottie.host/769c06ae-72dc-4031-a8b2-2e071687c3d5/DFySAlId5o.lottie"
+                                            loop
+                                            autoplay
+                                            className="w-55 h-55"
+                                        />
+                                        <p className="text-lg font-iranYekanBold text-body">بلاگی هنوز ساخته نشده!!</p>
+                                        <Link href={"/p-admin/blog/create"} className="text-sm px-6 py-2 flex items-center text-white justify-center rounded-xl font-vazirBold bg-cusOrang hover:bg-cusOrang/80 transition">ساخت بلاگ</Link>
+                                    </div>
+                                </td>
+                            </tr>
+                        )
+                    }
                 </tbody>
             </table>
         </div>

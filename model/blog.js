@@ -24,6 +24,10 @@ const schema = mongoose.Schema({
         ref: "User",
         required: true
     },
+    publish: {
+        type: Boolean,
+        required: true
+    },
     img: {
         type: String,
         default: null,

@@ -5,58 +5,43 @@ import UserModel from "@/model/user";
 import { validationToken } from "@/utility/auth";
 import multer from "multer";
 import path from "path";
-import fs from "fs";
 
-// تنظیمات multer
 const upload = multer({
     storage: multer.diskStorage({
-        destination: "./public/uploads/blogs", // پوشه ذخیره عکس
+        destination: "./public/uploads/blogs",
         filename: (req, file, cb) => {
-            const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-            cb(null, file.fieldname + "-" + uniqueSuffix + path.extname(file.originalname));
+            const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1E9);
+            cb(null, "img-" + uniqueSuffix + path.extname(file.originalname));
         },
     }),
-    limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
+    limits: { fileSize: 10 * 1024 * 1024 },
     fileFilter: (req, file, cb) => {
         const filetypes = /jpeg|jpg|png|gif|webp/;
         const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
         const mimetype = filetypes.test(file.mimetype);
-        if (extname && mimetype) {
-            return cb(null, true);
-        } else {
-            cb(new Error("فقط تصاویر مجاز هستند!"));
-        }
+        if (extname && mimetype) return cb(null, true);
+        cb(new Error("فقط فایل تصویری مجاز است"));
     },
 });
 
-// این برای غیرفعال کردن bodyParser پیش‌فرض next.js هست
-export const config = {
-    api: {
-        bodyParser: false, // خیلی مهم!
-    },
-};
+export const config = { api: { bodyParser: false } };
 
-// middleware برای اجرای multer
 const runMiddleware = (req, res, fn) => {
     return new Promise((resolve, reject) => {
         fn(req, res, (result) => {
-            if (result instanceof Error) {
-                return reject(result);
-            }
-            return resolve(result);
+            if (result instanceof Error) return reject(result);
+            resolve(result);
         });
     });
 };
 
-const handler = async (req, res) => {
-    if (req.method !== "POST") {
-        return res.status(405).json({ message: "Method not allowed" });
-    }
+export default async function handler(req, res) {
+    if (req.method !== "POST") return res.status(405).json({ message: "Method not allowed" });
 
     try {
         await ConnectDb();
 
-        // اجرای multer
+        // چون عکس اجباریه → upload.single کاملاً کافیه و بدون خطاست
         await runMiddleware(req, res, upload.single("img"));
 
         const { token } = req.cookies;
@@ -66,38 +51,39 @@ const handler = async (req, res) => {
         if (!userPayload) return res.status(401).json({ message: "توکن نامعتبر" });
 
         const user = await UserModel.findOne({ email: userPayload.email });
-
-        if (!user) return res.status(404).json({ message: "کاربر یافت نشد" });
-        if (user.role !== "admin") return res.status(403).json({ message: "دسترسی ممنوع" });
+        if (!user || user.role !== "admin") return res.status(403).json({ message: "دسترسی ممنوع" });
 
         const { title, content, description } = req.body;
 
         if (!title?.trim() || !content?.trim() || !description?.trim()) {
-            return res.status(400).json({ message: "همه فیلدها الزامی هستند" });
+            return res.status(400).json({ message: "عنوان، محتوا و توضیحات الزامی هستند" });
         }
 
-        const existingBlog = await BlogModel.findOne({ title });
-        if (existingBlog) {
-            return res.status(409).json({ message: "عنوان بلاگ تکراری است" });
-        }
+        const existing = await BlogModel.findOne({ title });
+        if (existing) return res.status(409).json({ message: "عنوان تکراری است" });
 
-        // مسیر عکس آپلود شده
-        const imgPath = req.file ? `/uploads/blogs/${req.file.filename}` : null;
+        // req.file حتماً وجود داره چون عکس اجباریه
+        const imgPath = `/uploads/blogs/${req.file.filename}`;
 
         const newBlog = await BlogModel.create({
-            title,
-            content,
-            description,
+            title: title.trim(),
+            content: content.trim(),
+            description: description.trim(),
             author: user._id,
+            publish: false,
             img: imgPath,
         });
 
-        return res.status(201).json({ message: "بلاگ با موفقیت ایجاد شد", data: newBlog });
+        return res.status(201).json({
+            message: "بلاگ با موفقیت ایجاد شد (پیش‌نویس)",
+            data: newBlog
+        });
 
     } catch (err) {
         console.error("خطا در ایجاد بلاگ:", err);
-        return res.status(500).json({ message: "خطای سرور", error: err.message });
+        return res.status(500).json({
+            message: "خطای سرور",
+            error: err.message
+        });
     }
-};
-
-export default handler;
+}
