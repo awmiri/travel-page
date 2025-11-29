@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import Link from 'next/link';
 import axios from 'axios';
@@ -9,6 +9,8 @@ function Table({ blogs }) {
     const [openModal, setOpenModal] = useState(false)
     const [blogId, setBlogId] = useState(false)
     const [author, setAuthor] = useState(false)
+    const [search, setSearch] = useState("")
+    const [filterBlog, setFilterBlog] = useState(blogs || [])
     const publishBlogHandler = async () => {
         try {
             const data = {
@@ -18,43 +20,55 @@ function Table({ blogs }) {
             const res = await axios.patch("/api/blog/publishblog", data)
             if (res.status === 200) {
                 toast.success("بلاگ با موفقیت منتشر شد")
-                openModal(false)
+                setOpenModal(false)
             }
         } catch (err) {
             const status = err.response?.status
             if (status === 405) {
-                toast.success("این بلاگ توسط شما نوشته نشده")
+                toast.warn("این بلاگ توسط شما نوشته نشده")
+                setOpenModal(false)
             } else if (status === 404) {
-                toast.success("کاربر یا بلاگ پیدا نشده")
+                toast.warn("کاربر یا بلاگ پیدا نشده")
+                setOpenModal(false)
             } else if (status === 400) {
-                toast.success("فیلدا به درستی پرنشدن")
+                toast.warn("فیلدا به درستی پرنشدن")
+                setOpenModal(false)
             }
 
         }
     }
+
+    useEffect(() => {
+        if (!search.trim()) {
+            setFilterBlog(blogs || [])
+        } else {
+            const filtered = blogs?.filter((item) =>
+                item.title.includes(search) ||
+                `${item.author.name} ${item.author.lastName}`.includes(search)
+            ) || []
+            setFilterBlog(filtered)
+        }
+    }, [search, blogs])
     return (
         <>
             <ToastContainer autoClose={2500} />
             <div className="relative rounded-2xl overflow-x-auto bg-cusBlue/20 shadow border border-black/30">
                 <div className="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 p-4">
                     <div>
-                        <button id="dropdownDefaultButton2" data-dropdown-toggle="dropdown-2" className="inline-flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none" type="button">
-                            Action
-                            <svg className="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7" /></svg>
-                        </button>
-                        <div id="dropdown-2" className="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-32">
-                            <ul className="p-2 text-sm text-body font-medium" aria-labelledby="dropdownDefaultButton2">
-                                <li>
-                                    <a href="#" className="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Reward</a>
+                        <div className="inline-flex group items-center justify-center border shadow-xs rounded-lg text-sm px-3 py-2 relative" type="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
+                                <path d="M18.75 12.75h1.5a.75.75 0 0 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM12 6a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 6ZM12 18a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 18ZM3.75 6.75h1.5a.75.75 0 1 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM5.25 18.75h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5ZM3 12a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 3 12ZM9 3.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM12.75 12a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0ZM9 15.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" />
+                            </svg>
+
+                            <ul className=" w-[140px] text-center bg-white shadow-2xl top-10 right-0 rounded-xl absolute overflow-hidden opacity-0 h-0 invisible group-hover:opacity-100 group-hover:h-fit group-hover:visible transition-all duration-300 " aria-labelledby="dropdownDefaultButton2">
+                                <li className='px-3.5 py-3 text-xs font-vazirBold hover:bg-cusOrang/90 hover:text-white transition'>
+                                    همه
                                 </li>
-                                <li>
-                                    <a href="#" className="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Promote</a>
+                                <li className='px-3.5 py-3 text-xs font-vazirBold hover:bg-cusOrang/90 hover:text-white transition'>
+                                    منتشر‌شده
                                 </li>
-                                <li>
-                                    <a href="#" className="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Archive</a>
-                                </li>
-                                <li>
-                                    <a href="#" className="inline-flex items-center w-full p-2 text-fg-danger hover:bg-neutral-tertiary-medium rounded">Delete</a>
+                                <li className='px-3.5 py-3 text-xs font-vazirBold hover:bg-cusOrang/90 hover:text-white transition'>
+                                    منتشر‌نشده
                                 </li>
                             </ul>
                         </div>
@@ -63,7 +77,7 @@ function Table({ blogs }) {
                         <div className="absolute inset-y-0 start-0 flex items-center ps-3 text-black/30 pointer-events-none">
                             <svg className="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" /></svg>
                         </div>
-                        <input type="text" id="input-group-1" className="block w-full max-w-96 ps-9 pe-3 py-2 bg-neutral-secondary-medium border border-black/40 text-heading text-sm rounded-2xl focus:ring-brand focus:border-brand shadow-xs placeholder:text-body" placeholder="Search" />
+                        <input type="text" id="input-group-1" className="block w-full max-w-96 ps-9 pe-3 py-2 border border-black/40 text-sm rounded-2xl shadow-xs" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
                     </div>
                 </div>
                 <table className="w-full text-sm text-left rtl:text-right text-body">
@@ -86,7 +100,7 @@ function Table({ blogs }) {
                     <tbody className={`${!blogs ? ' flex items-center justify-center w-full' : ''}`}>
                         {
                             blogs ? (
-                                blogs.map((item) => (
+                                filterBlog.map((item) => (
                                     <tr key={item._id} className="bg-neutral-primary-soft border-b border-black/30 hover:bg-cusBlue/40">
                                         <th scope="row" className="flex items-center px-6 py-4 text-heading whitespace-nowrap font-vazirBold text-[13px]">
                                             <p className='hover:text-black/50'>{item.title}</p>
