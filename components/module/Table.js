@@ -10,6 +10,7 @@ function Table({ blogs }) {
     const [blogId, setBlogId] = useState(false)
     const [author, setAuthor] = useState(false)
     const [search, setSearch] = useState("")
+    const [statusFilter, setStatusFilter] = useState("all")
     const [filterBlog, setFilterBlog] = useState(blogs || [])
     const publishBlogHandler = async () => {
         try {
@@ -39,16 +40,24 @@ function Table({ blogs }) {
     }
 
     useEffect(() => {
-        if (!search.trim()) {
-            setFilterBlog(blogs || [])
+        let result = blogs || []
+        if (statusFilter === "published") {
+            result = result.filter(item => item.publish === true)
+        } else if (statusFilter === "unpublished") {
+            result = result.filter(item => item.publish === false)
         } else {
-            const filtered = blogs?.filter((item) =>
-                item.title.includes(search) ||
-                `${item.author.name} ${item.author.lastName}`.includes(search)
-            ) || []
-            setFilterBlog(filtered)
+            result = blogs
         }
-    }, [search, blogs])
+
+        if (search.trim()) {
+            result = result.filter(item =>
+                item.title.toLowerCase().includes(search.toLowerCase()) ||
+                `${item.author.name} ${item.author.lastName}`.toLowerCase().includes(search.toLowerCase())
+            )
+        }
+
+        setFilterBlog(result)
+    }, [search, blogs, statusFilter])
     return (
         <>
             <ToastContainer autoClose={2500} />
@@ -61,13 +70,13 @@ function Table({ blogs }) {
                             </svg>
 
                             <ul className=" w-[140px] text-center bg-white shadow-2xl top-10 right-0 rounded-xl absolute overflow-hidden opacity-0 h-0 invisible group-hover:opacity-100 group-hover:h-fit group-hover:visible transition-all duration-300 " aria-labelledby="dropdownDefaultButton2">
-                                <li className='px-3.5 py-3 text-xs font-vazirBold hover:bg-cusOrang/90 hover:text-white transition'>
+                                <li className={`px-3.5 py-3 text-xs font-vazirBold hover:bg-cusOrang/90 hover:text-white transition ${statusFilter === "all" ? 'bg-cusOrang/90 text-white' : ''}`} onClick={() => setStatusFilter("all")}>
                                     همه
                                 </li>
-                                <li className='px-3.5 py-3 text-xs font-vazirBold hover:bg-cusOrang/90 hover:text-white transition'>
+                                <li className={`px-3.5 py-3 text-xs font-vazirBold hover:bg-cusOrang/90 hover:text-white transition ${statusFilter === "publish" ? 'bg-cusOrang/90 text-white' : ''}`} onClick={() => setStatusFilter("publish")}>
                                     منتشر‌شده
                                 </li>
-                                <li className='px-3.5 py-3 text-xs font-vazirBold hover:bg-cusOrang/90 hover:text-white transition'>
+                                <li className={`px-3.5 py-3 text-xs font-vazirBold hover:bg-cusOrang/90 hover:text-white transition ${statusFilter === "unpublished" ? 'bg-cusOrang/90 text-white' : ''}`} onClick={() => setStatusFilter("unpublished")}>
                                     منتشر‌نشده
                                 </li>
                             </ul>
@@ -99,8 +108,8 @@ function Table({ blogs }) {
                     </thead>
                     <tbody className={`${!blogs ? ' flex items-center justify-center w-full' : ''}`}>
                         {
-                            blogs ? (
-                                filterBlog.map((item) => (
+                            filterBlog?.length > 0 ? (
+                                filterBlog?.map((item) => (
                                     <tr key={item._id} className="bg-neutral-primary-soft border-b border-black/30 hover:bg-cusBlue/40">
                                         <th scope="row" className="flex items-center px-6 py-4 text-heading whitespace-nowrap font-vazirBold text-[13px]">
                                             <p className='hover:text-black/50'>{item.title}</p>
