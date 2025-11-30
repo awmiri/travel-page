@@ -87,7 +87,7 @@ function Header() {
                         <li className='cursor-pointer p-1 md:p-1.5 query860:p-2.5 font-iranYekanRegular text-textLight dark:text-white text-[13px] md:text-[15px] query860:text-base query1000:text-lg query1120:text-xl nav_animation'>هتل</li>
                         <li className='cursor-pointer p-1 md:p-1.5 query860:p-2.5 font-iranYekanRegular text-textLight dark:text-white text-[13px] md:text-[15px] query860:text-base query1000:text-lg query1120:text-xl nav_animation'>تور داخلی</li>
                         <li className='cursor-pointer p-1 md:p-1.5 query860:p-2.5 font-iranYekanRegular text-textLight dark:text-white text-[13px] md:text-[15px] query860:text-base query1000:text-lg query1120:text-xl nav_animation'>تور خارجی</li>
-                        <li className='cursor-pointer p-1 md:p-1.5 query860:p-2.5 font-iranYekanRegular text-textLight dark:text-white text-[13px] md:text-[15px] query860:text-base query1000:text-lg query1120:text-xl nav_animation'>بلاگ‌ها</li>
+                        <Link href={"/blog"} className='cursor-pointer p-1 md:p-1.5 query860:p-2.5 font-iranYekanRegular text-textLight dark:text-white text-[13px] md:text-[15px] query860:text-base query1000:text-lg query1120:text-xl nav_animation'>بلاگ‌ها</Link>
                         <li className='cursor-pointer p-1 md:p-1.5 query860:p-2.5 font-iranYekanRegular text-textLight dark:text-white text-[13px] md:text-[15px] query860:text-base query1000:text-lg query1120:text-xl nav_animation'>سفرنامه</li>
                         <li className='cursor-pointer p-1 md:p-1.5 query860:p-2.5 font-iranYekanRegular text-textLight dark:text-white'>
                             <svg viewBox="0 0 24 24" fill="currentColor" className="size-4 md:size-5">
