@@ -106,7 +106,7 @@ function Header() {
                             <li className='p-2.5 font-iranYekanRegular text-textLight dark:text-white text-sm'>هتل</li>
                             <li className='p-2.5 font-iranYekanRegular text-textLight dark:text-white text-sm'>تور داخلی</li>
                             <li className='p-2.5 font-iranYekanRegular text-textLight dark:text-white text-sm'>تور خارجی</li>
-                            <li className='p-2.5 font-iranYekanRegular text-textLight dark:text-white text-sm'>بلاگ‌ها</li>
+                            <Link href={"/blog"} className='p-2.5 font-iranYekanRegular text-textLight dark:text-white text-sm'>بلاگ‌ها</Link>
                             <li className='p-2.5 font-iranYekanRegular text-textLight dark:text-white text-sm'>سفرنامه</li>
                         </ul>
                     </div>

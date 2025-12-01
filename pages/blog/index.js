@@ -3,7 +3,7 @@ import Header from '@/components/module/Header'
 import ConnectDb from '@/config/ConnectDb'
 import BlogModel from '@/model/blog'
 import Image from 'next/image';
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 function Blog({ blogs }) {
 
@@ -107,8 +107,8 @@ function Blog({ blogs }) {
                 </div>
             </div>
             {/* filter item in mobile */}
-            <div className={`bg-darkFooterBg fixed bottom-0 w-full z-40 rounded-t-3xl overflow-hidden transition duration-200 ${openModal ? '' : 'opacity-0 invisible'}`}>
-                <div className='flex items-center justify-between p-3.5 bg-amber-50/20'>
+            <div className={`dark:bg-darkFooterBg bg-cusWhite2 fixed bottom-0 w-full z-40 rounded-t-3xl overflow-hidden transition duration-200 ${openModal ? '' : 'opacity-0 invisible'}`}>
+                <div className='flex items-center justify-between p-3.5 dark:bg-amber-50/20 bg-mainBgColorDark/30'>
                     <span className='font-vazirBold'>مرتب سازی بر اساس</span>
                     <span onClick={() => setOpenModal(false)} className='cursor-pointer'>
                         <svg viewBox="0 0 24 24" fill="currentColor" className="size-6">
@@ -147,7 +147,7 @@ function Blog({ blogs }) {
                 </ul>
             </div>
             {/* dark bg */}
-            <div className={`absolute w-full h-full top-0 bg-darkFooterBg/20 query600:hidden z-30 ${openModal ? 'opacity-100 visible' : 'opacity-0 invisible'}`}></div>
+            <div className={`absolute w-full h-full top-0 bg-darkFooterBg/20 query600:hidden z-30 ${openModal ? 'opacity-100 visible' : 'opacity-0 invisible'}`} onClick={() => setOpenModal(false)}></div>
         </div>
     )
 }
