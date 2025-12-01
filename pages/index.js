@@ -18,7 +18,7 @@ export default function Home() {
       <header>
         <Header />
       </header>
-      <main>
+      <main className="overflow-x-hidden">
         <section className="mt-5">
           <div className="flex max-query600:flex-col justify-between mx-[20px] md:mx-[24px] query1000:mx-[60px] query1120:mx-[71.5px] relative">
             <div className=" mt-7 max-query600:w-full">

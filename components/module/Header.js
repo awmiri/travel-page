@@ -147,7 +147,7 @@ function Header() {
 
                                             )
                                         }
-                                        <div className={`w-[220px] ${openUserInfo ? "opacity-100 visible" : "opacity-0 invisible"} transition-all p-3 bg-cusBlue text-white absolute z-20 -bottom-[310px] -right-[170px] rounded-2xl`} openUserInfo>
+                                        <div className={`w-[220px] ${openUserInfo ? "opacity-100 visible" : "opacity-0 invisible"} transition-all p-3 bg-cusBlue text-white absolute z-20 -bottom-[250px] -right-[170px] rounded-2xl`} openUserInfo>
                                             <div>
                                                 <h5 className='mb-3 font-vazirBold text-[17px]'>خوش امدید</h5>
                                                 <div className='border-t border-b'>
@@ -200,9 +200,9 @@ function Header() {
                 </div>
             </div >
             {/* bg cus dark */}
-            <div div className={`bg-black/15 absolute z-10 w-full h-dvh top-0 sm:hidden transition-all duration-200 ${openMobileNav ? 'opacity-100 visible' : 'opacity-0 invisible'}`
+            <div div className={`bg-black/15 absolute z-40 w-full h-dvh top-0 sm:hidden transition-all duration-200 ${openMobileNav ? 'opacity-100 visible' : 'opacity-0 invisible'}`
             } onClick={() => setOpenMobileNav(false)}></div  >
-            <div className={`bg-[#0006]/30 backdrop-blur-[1px] absolute z-10 w-full h-dvh top-0  transition-all duration-200 ${openUserInfo ? 'opacity-100 visible' : 'opacity-0 invisible'}`} onClick={() => setOpenUserInfo(false)}></div>
+            <div className={`bg-[#0006]/30 backdrop-blur-[1px] absolute z-20 w-full h-dvh top-0  transition-all duration-200 ${openUserInfo ? 'opacity-100 visible' : 'opacity-0 invisible'}`} onClick={() => setOpenUserInfo(false)}></div>
         </>
     )
 }

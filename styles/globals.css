@@ -52,8 +52,14 @@
   --breakpoint-query400: 25rem;
 }
 
+html,
+body {
+  overflow-x: hidden !important;
+}
+
 body {
   background: #fffbfb;
+  /* overflow-x: hidden; */
 }
 
 /* Dark mode */
