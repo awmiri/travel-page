@@ -4,10 +4,10 @@ import React from 'react'
 
 function BlogCart({ blogs }) {
     return (
-        <div className='bg-black/30 w-[300PX] h-[460px] rounded-2xl'>
+        <div className='bg-black/30 \ query1280:w-[300PX] h-[460px] rounded-2xl'>
             <Link href={`/blog/${blogs._id}`}>
                 <Image src={blogs.img} width={100}
-                    height={100} className="w-[350PX] h-[200PX] rounded-b-3xl rounded-t-2xl" />
+                    height={100} alt='blog imag' className="w-full h-[200PX] rounded-b-3xl rounded-t-2xl" />
             </Link>
             <div className='px-3 flex flex-col justify-between h-[260px] '>
                 <Link href={`/blog/${blogs._id}`} className='inline-block mt-2.5 font-iranYekanBold text-lg text-justify'>{blogs.title}</Link>

@@ -16,12 +16,8 @@ function Header() {
     const [userAdmin, setUserAdmin] = useState(false)
     const [userLogin, setUserLogin] = useState(false)
     const [userContent, setUserContent] = useState({})
-    console.log(userContent);
 
     const router = useRouter()
-    console.log(userContent);
-
-
     useEffect(() => {
         const isUserLogin = async () => {
             try {
