@@ -63,7 +63,7 @@ function AllUser({ admin, allAdmin }) {
             <AdminLayout>
                 <ToastContainer position='top-center' autoClose={2500} />
                 <div className='flex flex-col justify-between w-full'>
-                    <div className='flex items-center flex-row-reverse w-full gap-10 '>
+                    <div className='flex items-center flex-row-reverse flex-wrap w-full gap-10 '>
                         {
                             currentUsers?.map((user) => (
                                 <div key={user._id} className='border border-black/20 shadow-xl rounded-2xl p-3 w-[250px] h-[190px] dark:bg-white/20'>

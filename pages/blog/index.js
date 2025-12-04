@@ -112,7 +112,7 @@ function Blog({ blogs }) {
                     </div>
                 </div>
                 {/* filter item in mobile */}
-                <div className={`dark:bg-darkFooterBg bg-cusWhite2 fixed bottom-0 w-full z-40 rounded-t-3xl overflow-hidden transition duration-200 ${openModal ? '' : 'opacity-0 invisible'}`}>
+                <div className={`dark:bg-darkFooterBg bg-cusWhite2 fixed bottom-0 w-full query600:hidden z-40 rounded-t-3xl overflow-hidden transition duration-200 ${openModal ? '' : 'opacity-0 invisible'}`}>
                     <div className='flex items-center justify-between p-3.5 dark:bg-amber-50/20 bg-mainBgColorDark/30'>
                         <span className='font-vazirBold'>مرتب سازی بر اساس</span>
                         <span onClick={() => setOpenModal(false)} className='cursor-pointer'>

@@ -342,14 +342,3 @@ input[type="number"]::-webkit-outer-spin-button {
   color: #05060f99;
   transition: color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
 }
-.input:hover,
-.input:focus,
-.input-group:hover .input {
-  outline: none;
-  border-color: #05060f;
-}
-
-.input-group:hover .label,
-.input:focus {
-  color: #05060fc2;
-}

@@ -17,7 +17,6 @@ function FindUser({ user: initialUser }) {
         identifyId: user.identifyId || "",
         profile: user.profile || "",
     })
-    console.log(dataForm.profile);
 
     const changeStatesInfoHandler = (e) => {
         const { name, value } = e.target
@@ -85,7 +84,6 @@ function FindUser({ user: initialUser }) {
             toast.error("خطا اتصال")
         }
     }
-
 
     return (
         <AdminLayout>
