@@ -52,14 +52,8 @@
   --breakpoint-query400: 25rem;
 }
 
-html,
-body {
-  overflow-x: hidden !important;
-}
-
 body {
   background: #fffbfb;
-  /* overflow-x: hidden; */
 }
 
 /* Dark mode */
@@ -170,11 +164,11 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /* change them btn */
 .switch {
-  font-size: 17px;
   position: relative;
   display: inline-block;
   width: 64px;
   height: 34px;
+  overflow: hidden;
 }
 
 .switch input {

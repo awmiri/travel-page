@@ -98,7 +98,7 @@ function Blog({ blogs }) {
                                 {/* blog content */}
                                 <div className='w-full mt-8 flex  items-end justify-end'>
                                     {/* blogs modal */}
-                                    <div className=' w-full grid grid-cols-1 sm:grid-cols-2 query1120:grid-cols-3 gap-6 mb-5'>
+                                    <div className=' w-full grid grid-cols-1 sm:grid-cols-2 query1120:grid-cols-4 gap-6 mb-5'>
                                         {
                                             filterItems.map((item) => (
                                                 <BlogCart blogs={item} key={item._id} />
