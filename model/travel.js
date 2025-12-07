@@ -18,7 +18,7 @@ const schema = mongoose.Schema({
         require: true
     },
     image: {
-        type: String,
+        type: [String],
         required: true
     },
     imageFlag: {

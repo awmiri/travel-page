@@ -63,7 +63,7 @@ function Blog({ blogs }) {
                         {/* filter content */}
                         <div className='flex max-query900:flex-col gap-5'>
                             {/* search filter */}
-                            <div className='bg-black/20 h-[50px] dark:bg-white/20 flex items-center max-query900:justify-between pl-1.5 rounded-xl '>
+                            <div className='bg-cusWhite h-[50px] dark:bg-white/20 flex items-center max-query900:justify-between pl-1.5 rounded-xl '>
                                 {/* search input */}
                                 <input type="text" className='p-3.5 w-full border-0 outline-0 placeholder:text-sm dark:placeholder:text-white placeholder:font-iranYekanBold text-sm font-vazirBold text-darkFooterBg dark:text-cusWhite2' placeholder='جستجو' value={search} onChange={(e) => setSearch(e.target.value)} />
                                 {/* svg */}
@@ -73,7 +73,7 @@ function Blog({ blogs }) {
                             </div>
                             {/* publish time filter  */}
                             <div className='w-full'>
-                                <div className='bg-black/20 dark:bg-white/20 w-full px-3 rounded-xl flex max-query600:justify-center items-center  gap-10' onClick={() => setOpenModal(true)}>
+                                <div className='bg-cusWhite dark:bg-white/20 w-full px-3 rounded-xl flex max-query600:justify-center items-center  gap-10' onClick={() => setOpenModal(true)}>
                                     {/* filter title */}
                                     <p className='flex items-center gap-1.5 max-query600:hidden'>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">

@@ -4,7 +4,7 @@ import React from 'react'
 
 function BlogCart({ blogs }) {
     return (
-        <div className='bg-black/30 h-[460px] rounded-2xl'>
+        <div className='bg-cusWhite dark:bg-black/30 h-[460px] rounded-2xl'>
             <Link href={`/blog/${blogs._id}`}>
                 <Image src={blogs.img} width={100}
                     height={100} alt='blog imag' className="w-full h-[200px] rounded-b-3xl rounded-t-2xl" />

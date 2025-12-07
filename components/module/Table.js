@@ -86,7 +86,7 @@ function Table({ blogs }) {
                         <div className="absolute inset-y-0 start-0 flex items-center ps-3 text-black/30 pointer-events-none">
                             <svg className="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" /></svg>
                         </div>
-                        <input type="text" id="input-group-1" className="block w-full max-w-96 ps-9 pe-3 py-2 border border-black/40 text-sm rounded-2xl shadow-xs" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
+                        <input type="text" id="input-group-1" className="block w-full max-w-96 ps-9 pe-3 py-2 border border-black/40 text-sm font-iranYekanMedium rounded-2xl shadow-xs" placeholder="جستجو" value={search} onChange={(e) => setSearch(e.target.value)} />
                     </div>
                 </div>
                 <table className="w-full text-sm text-left rtl:text-right text-body">
@@ -136,7 +136,6 @@ function Table({ blogs }) {
                                         </td>
                                     </tr>
                                 ))
-
                             ) : (
                                 <tr>
                                     <td colSpan="4" className="py-10 text-center">
@@ -147,8 +146,20 @@ function Table({ blogs }) {
                                                 autoplay
                                                 className="w-55 h-55"
                                             />
-                                            <p className="text-lg font-iranYekanBold text-body">بلاگی هنوز ساخته نشده!!</p>
-                                            <Link href={"/p-admin/blog/create"} className="text-sm px-6 py-2 flex items-center text-white justify-center rounded-xl font-vazirBold bg-cusOrang hover:bg-cusOrang/80 transition">ساخت بلاگ</Link>
+                                            {
+                                                statusFilter === "unpublished" ? (
+                                                    <div>
+                                                        <p className="text-lg font-iranYekanBold text-body">بلاگ منتشر نشده ای پیدا نشد</p>
+                                                        <span className="text-sm px-6 py-2 flex items-center text-white justify-center rounded-xl font-vazirBold bg-cusOrang hover:bg-cusOrang/80 transition" onClick={() => setStatusFilter("all")}>همه بلاگ‌ها</span>
+                                                    </div>
+                                                ) : (
+                                                    <div className='flex flex-col'>
+                                                        <p className="text-lg font-iranYekanBold text-body">بلاگی هنوز ساخته نشده!!</p>
+                                                        <Link href={"/p-admin/blog/create"} className="text-sm px-6 py-2 flex items-center text-white justify-center rounded-xl font-vazirBold bg-cusOrang hover:bg-cusOrang/80 transition">ساخت بلاگ</Link>
+                                                    </div>
+
+                                                )
+                                            }
                                         </div>
                                     </td>
                                 </tr>
