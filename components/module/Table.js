@@ -112,7 +112,7 @@ function Table({ blogs }) {
                                 filterBlog?.map((item) => (
                                     <tr key={item._id} className="bg-neutral-primary-soft border-b border-black/30 hover:bg-cusBlue/40">
                                         <th scope="row" className="flex items-center px-6 py-4 text-heading whitespace-nowrap font-vazirBold text-[13px]">
-                                            <p className='hover:text-black/50'>{item.title}</p>
+                                            <Link href={`/p-admin/blog/${item._id}`} className='hover:text-black/50'>{item.title}</Link>
                                         </th>
                                         <td className="px-6 py-4">
                                             <p className='font-iranYekanBold text-sm'>{item.author.name} {item.author.lastName}</p>
